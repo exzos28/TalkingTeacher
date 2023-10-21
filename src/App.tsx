@@ -6,7 +6,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {useRoot} from './core/Root/hooks';
 import RootProvider from './core/Root/RootProvider';
-import {NavigationRoot} from './Navigation';
+import {NavigationRoot} from './navigation';
 import {Launcher} from './core/Launcher';
 import {useStyles} from './core/styling/hooks';
 import {ApplicationProvider} from '@ui-kitten/components';

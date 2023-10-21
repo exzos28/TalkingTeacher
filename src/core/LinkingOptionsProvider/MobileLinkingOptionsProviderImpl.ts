@@ -6,7 +6,7 @@ import {LinkingOptionsProvider} from './LinkingOptionsProvider';
 import {NavigationContainer} from '../NavigationContainer';
 import {SpecialLocation, UNKNOWN} from '../SpecialLocation';
 import {Url} from '../units';
-import {RootParamList} from '../../Navigation/RootNavigator';
+import {RootParamList} from '../../navigation/RootNavigator';
 import {LocationSource} from '../Location';
 
 export default class MobileLinkingOptionsProviderImpl

@@ -23,8 +23,6 @@ export default class WebRootService
   extends BaseRootService
   implements Root, Service
 {
-  readonly logExporter = new WebLogExporterImpl(this);
-  readonly sharing = new StubSharingImpl();
   readonly keyValueStore = new WebKeyValueStoreService<KeyValueMap>();
   readonly secureKeyValueStore = this
     .keyValueStore as unknown as KeyValueStore<SecureKeyValueMap>;
@@ -34,6 +32,8 @@ export default class WebRootService
   );
   readonly jsonSecureKeyValueStore = this
     .jsonKeyValueStore as unknown as JsonKeyValueStore<JsonSecureKeyValueMap>;
+  readonly logExporter = new WebLogExporterImpl(this);
+  readonly sharing = new StubSharingImpl();
 
   readonly linkingOptionsProvider = new WebLinkingOptionsProviderImpl();
   readonly location = new WebLocationImpl(this);

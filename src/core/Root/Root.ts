@@ -4,7 +4,7 @@ import {
   NavigationContainer,
   NavigationContainerBinding,
 } from '../NavigationContainer';
-import {RootParamList} from '../../Navigation/RootNavigator';
+import {RootParamList} from '../../navigation/RootNavigator';
 import {NavigationContainerTheme} from '../NavigationContainerTheme';
 import {SpecialLocation} from '../SpecialLocation';
 import {Configuration, Debug} from '../Configuration';
@@ -18,8 +18,11 @@ import {Location} from '../Location';
 import {Sharing} from '../Sharing';
 import {LogExporter} from '../LogExporter';
 import {ConfigurationValues} from '../Configuration/ConfigurationValues';
+import {Flags} from '../Flags';
+import {ManualTestHelper} from '../ManualTestHelper';
 
 export interface Root {
+  readonly flags: Flags;
   readonly appearance: Appearance<Theme>;
   readonly sharing: Sharing;
   readonly navigationContainer: NavigationContainer<RootParamList>;
@@ -37,6 +40,7 @@ export interface Root {
   readonly windowDimensionsState: WindowDimensionsState;
   readonly location: Location;
   readonly linkingOptionsProvider: LinkingOptionsProvider;
+  readonly manualTestHelper: ManualTestHelper;
 
   reset(): void;
 }

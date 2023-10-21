@@ -10,13 +10,15 @@ import {LANGUAGES} from '../../core/Localization/LANGUAGES';
 import {Locale} from '../../core/Localization';
 import {runInAction} from 'mobx';
 
-export type OnboardingScreenProps = {
+export type WelcomeLanguagesScreenProps = {
   pickLanguage(): Promise<Locale | undefined>;
+  onNextPress(): void;
 };
 
-export default observer(function OnboardingScreen({
+export default observer(function WelcomeLanguagesScreen({
   pickLanguage,
-}: OnboardingScreenProps) {
+  onNextPress,
+}: WelcomeLanguagesScreenProps) {
   const {translation, preferences} = useRoot();
   const strings = useStrings();
   const values = useMemo(() => [...LANGUAGES.values()], []);
@@ -60,7 +62,7 @@ export default observer(function OnboardingScreen({
       <ContentSpace gutter={Gutter.Large}>
         <Space gutter={Gutter.Middle}>
           <TitleText category="s1">
-            {strings['onboarding.step1.title1']}
+            {strings['welcomeLanguages.title1']}
           </TitleText>
           <SelectedLanguage
             label={currentSelected.text}
@@ -71,7 +73,7 @@ export default observer(function OnboardingScreen({
         </Space>
         <Space gutter={Gutter.Middle}>
           <TitleText category="s1">
-            {strings['onboarding.step1.title2']}
+            {strings['welcomeLanguages.title2']}
           </TitleText>
           <SelectedLanguage
             label={nextSelected.text}
@@ -80,8 +82,8 @@ export default observer(function OnboardingScreen({
           />
         </Space>
       </ContentSpace>
-      <NextButton onPress={() => {}} size="medium">
-        {strings['onboarding.step1.button']}
+      <NextButton onPress={onNextPress} size="medium">
+        {strings['welcomeLanguages.nextButton']}
       </NextButton>
     </RootSaveAreaView>
   );
@@ -111,6 +113,6 @@ const NextButton = variance(Button)(() => ({
 
 const TitleText = variance(Text)(() => ({
   root: {
-    fontSize: 28,
+    fontSize: 20,
   },
 }));

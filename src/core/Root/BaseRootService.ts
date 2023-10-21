@@ -23,15 +23,21 @@ import {LocationSource, Location} from '../Location';
 import {LinkingOptionsProvider} from '../LinkingOptionsProvider';
 import {SpecialLocationImpl} from '../SpecialLocation';
 import {NavigationContainerImpl} from '../NavigationContainer';
-import {RootParamList} from '../../Navigation/RootNavigator';
+import {RootParamList} from '../../navigation/RootNavigator';
 import {NavigationContainerThemeImpl} from '../NavigationContainerTheme';
 import {NavigationImpl} from '../Navigation';
 import {DebugLocationDetectorService} from '../DebugLocationDetector';
 import {Sharing} from '../Sharing';
 import {ManualTestHelperImpl} from '../ManualTestHelper';
+import {FlagsService} from '../Flags';
 
 export default abstract class BaseRootService implements Root, Service {
   constructor(protected readonly _core: Core) {}
+
+  abstract readonly jsonKeyValueStore: JsonKeyValueStore<JsonKeyValueMap>;
+  abstract readonly jsonSecureKeyValueStore: JsonKeyValueStore<JsonSecureKeyValueMap>;
+
+  readonly flags = new FlagsService(this);
 
   readonly localization = new LocalizationService(this);
 
@@ -48,9 +54,6 @@ export default abstract class BaseRootService implements Root, Service {
 
   readonly appWindow = new AppWindowService();
   readonly appWindowState = new AppWindowStateService(this);
-
-  abstract readonly jsonKeyValueStore: JsonKeyValueStore<JsonKeyValueMap>;
-  abstract readonly jsonSecureKeyValueStore: JsonKeyValueStore<JsonSecureKeyValueMap>;
 
   get configuration() {
     return this._core.configuration;
@@ -82,6 +85,7 @@ export default abstract class BaseRootService implements Root, Service {
 
   subscribe() {
     return batchDisposers(
+      this.flags.subscribe(),
       this.localization.subscribe(),
       this.preferences.subscribe(),
       this.windowDimensions.subscribe(),

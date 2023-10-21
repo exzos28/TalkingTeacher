@@ -18,9 +18,6 @@ export default class MobileRootService
   extends BaseRootService
   implements Root, Service
 {
-  readonly sharing = new MobileSharingImpl();
-  readonly logExporter = new MobileLogExporterFactory(this).create();
-
   readonly keyValueStore = new MobileKeyValueStoreImpl<KeyValueMap>();
   readonly jsonKeyValueStore = new JsonKeyValueStoreService(
     this,
@@ -33,6 +30,9 @@ export default class MobileRootService
     this,
     this.secureKeyValueStore,
   );
+
+  readonly sharing = new MobileSharingImpl();
+  readonly logExporter = new MobileLogExporterFactory(this).create();
 
   readonly location = new MobileLocationService(this);
   readonly locationSource = this.location;

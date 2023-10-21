@@ -1,7 +1,7 @@
 export default {
-  'onboarding.step1.title1': 'Hallo 👋 Wie ich sehe, sprichst du bereits ⬇️',
-  'onboarding.step1.title2': 'Das ist toll🔥! Welche Sprache möchtest du üben?',
-  'onboarding.step1.button': 'Weiter',
+  'welcomeLanguages.title1': 'Wie ich sehe, sprichst du bereits ⬇️',
+  'welcomeLanguages.title2': 'Das ist toll🔥! Welche Sprache möchtest du üben?',
+  'welcomeLanguages.nextButton': 'Weiter',
 
   'action.skip': 'Überspringen',
   'button.signIn': 'Anmeldung mit Instagram',

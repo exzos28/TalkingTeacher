@@ -1,10 +1,11 @@
 import {Locale} from '../../core/Localization';
 
 export type AuthParamList = {
-  WelcomeStep1:
+  WelcomeLanguages:
     | {
         pickedLanguage: Locale;
       }
     | undefined;
-  PickLanguageForWelcomeStep1: undefined;
+  WelcomeInfoApp: undefined;
+  PickLanguageForWelcomeLanguages: undefined;
 };

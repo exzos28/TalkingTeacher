@@ -1,8 +1,8 @@
 const en = {
-  'onboarding.step1.title1': 'Hi 👋, I see that you already speak ⬇️',
-  'onboarding.step1.title2':
+  'welcomeLanguages.title1': 'I see that you already speak ⬇️',
+  'welcomeLanguages.title2':
     "That's awesome🔥! What language do you want to practice?",
-  'onboarding.step1.button': 'Next',
+  'welcomeLanguages.nextButton': 'Next',
 
   'action.skip': 'Skip',
   'button.signIn': 'Sign in to Instagram',
