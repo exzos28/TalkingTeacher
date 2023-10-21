@@ -13,7 +13,7 @@
     "android:apk": "cd android && ./gradlew assembleRelease",
     "android:bundle": "cd android && ./gradlew bundleRelease",
     "pre-commit": "yarn lint-staged; yarn lint:fix; yarn typecheck",
-    "pre-push": "yarn lint-staged; yarn lint:fix; yarn typecheck"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@eva-design/eva": "^2.2.0",
