@@ -29,7 +29,7 @@ export const EmptyContent = observer(({onCreatePress}: EmptyContentProps) => {
       </LottieContainerView>
       <ButtonView>
         <Button size="giant" onPress={onCreatePress}>
-          Start chat
+          Create chat
         </Button>
       </ButtonView>
     </RootView>

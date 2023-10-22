@@ -8,6 +8,9 @@ import {PADDING} from '../constants';
 import {ArrowRightSvg} from '../../assets/svg/colorless';
 import {HoldSpeechButton} from './HoldSpeechButton';
 import {observer} from 'mobx-react-lite';
+import {Message as MessageComponent} from './Message';
+import {range} from 'lodash';
+import {nanoid} from 'nanoid/non-secure';
 
 export type ChatScreenProps = {
   isSpeaking: boolean;
@@ -17,6 +20,17 @@ export type ChatScreenProps = {
   onChangeMessage(message: string): void;
 };
 
+const TEXT =
+  'To create a small application where you can interact with me and send new messages, you will need to combine the use of the GPT-3.5 (or other version) API with UI and backend development for your application. ';
+
+const MESSAGES: Message[] = range(10).map(_ =>
+  _ % 2
+    ? {text: TEXT, id: nanoid(10), from: 'user'}
+    : {text: TEXT, id: nanoid(10), from: 'assistant'},
+);
+
+type Message = {id: string; text: string; from: 'user' | 'assistant'};
+
 export const ChatScreen = observer(
   ({
     onSpeechFinish,
@@ -25,15 +39,25 @@ export const ChatScreen = observer(
     message,
     onChangeMessage,
   }: ChatScreenProps) => {
-    const renderItem = useCallback(() => null, []);
+    const renderItem = useCallback(
+      ({item}: {item: Message}) => (
+        <MessageComponent
+          inverted={item.from === 'user'}
+          text={item.text}
+          playPossible={item.from === 'assistant'}
+          isPlaying={false}
+        />
+      ),
+      [],
+    );
     const theme = useTheme();
     return (
       <RootLayout level="4">
-        <RootSafeAreaView>
+        <RootSafeAreaView edges={['bottom']}>
           <FlatList
             contentContainerStyle={styles.container}
             inverted
-            data={[]}
+            data={MESSAGES}
             renderItem={renderItem}
           />
           <FooterView>

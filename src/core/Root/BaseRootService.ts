@@ -31,6 +31,7 @@ import {Sharing} from '../Sharing';
 import {ManualTestHelperImpl} from '../ManualTestHelper';
 import {FlagsService} from '../Flags';
 import {SettingsService} from '../Settings';
+import {ChatsService} from '../ChatsService';
 
 export default abstract class BaseRootService implements Root, Service {
   constructor(protected readonly _core: Core) {}
@@ -85,6 +86,8 @@ export default abstract class BaseRootService implements Root, Service {
 
   readonly manualTestHelper = new ManualTestHelperImpl();
 
+  readonly chats = new ChatsService(this);
+
   subscribe() {
     return batchDisposers(
       this.flags.subscribe(),
@@ -98,6 +101,8 @@ export default abstract class BaseRootService implements Root, Service {
       this.appWindowState.subscribe(),
       this.log.subscribe(),
       this.debugLocationDetector.subscribe(),
+
+      this.chats.subscribe(),
     );
   }
 

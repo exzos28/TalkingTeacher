@@ -22,8 +22,11 @@ import {Flags} from '../Flags';
 import {ManualTestHelper} from '../ManualTestHelper';
 import {Settings} from '../Settings';
 import {AppWindow, AppWindowState} from '../AppWindow';
+import {JsonKeyValueMap, JsonKeyValueStore} from '../JsonKeyValueStore';
+import {Chats} from '../ChatsService';
 
 export interface Root {
+  readonly jsonKeyValueStore: JsonKeyValueStore<JsonKeyValueMap>;
   readonly flags: Flags;
   readonly appearance: Appearance<Theme>;
   readonly sharing: Sharing;
@@ -46,6 +49,8 @@ export interface Root {
   readonly location: Location;
   readonly linkingOptionsProvider: LinkingOptionsProvider;
   readonly manualTestHelper: ManualTestHelper;
+
+  readonly chats: Chats;
 
   reset(): void;
 }

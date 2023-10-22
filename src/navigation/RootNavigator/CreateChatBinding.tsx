@@ -1,17 +1,12 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {observer} from 'mobx-react-lite';
-import {
-  CreateChatScreen,
-  CreateChatValues,
-} from '../../screens/CreateChatScreen';
 import {RootStackBindingProps} from './RootStackBindingProps';
-import {Alert} from 'react-native';
+import {CreateChatContainer} from '../../containers/CreateChatContainer';
 
 export type CreateChatBinding = RootStackBindingProps<'CreateChat'>;
 
-export default observer(function CreateChatBinding({}: CreateChatBinding) {
-  const submit = useCallback((values: CreateChatValues) => {
-    Alert.alert('Values', JSON.stringify(values, null, 1));
-  }, []);
-  return <CreateChatScreen onSubmit={submit} />;
+export default observer(function CreateChatBinding({
+  navigation,
+}: CreateChatBinding) {
+  return <CreateChatContainer goBack={navigation.goBack} />;
 });

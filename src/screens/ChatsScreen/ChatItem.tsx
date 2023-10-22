@@ -2,7 +2,6 @@ import React from 'react';
 import {observer} from 'mobx-react-lite';
 import {Layout, Text} from '@ui-kitten/components';
 import {sized, useTheme, variance} from '../../core';
-import {Chat} from './types';
 import {RectButton} from 'react-native-gesture-handler';
 import {useDifficulty} from '../../useDifficulty';
 import {PADDING} from '../constants';
@@ -10,6 +9,8 @@ import {View} from 'react-native';
 import {Gutter, Space} from '../../components/basic';
 import {AngleRightSvg} from '../../assets/svg/colorless';
 import {LANGUAGES} from '../../DATA';
+import {Chat} from '../../core/ChatsService';
+import {Locale} from '../../core/Localization';
 
 export type ChatItemProps = {
   item: Chat;
@@ -20,7 +21,7 @@ export type ChatItemProps = {
 export const ChatItem = observer(({item, onPress}: ChatItemProps) => {
   const difficultyValues = useDifficulty();
   const theme = useTheme();
-  const language = LANGUAGES.get(item.language)?.text ?? '';
+  const language = LANGUAGES.get(item.language as Locale)?.text ?? '';
   return (
     <RootLayout>
       <RectButton onPress={onPress}>

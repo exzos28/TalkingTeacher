@@ -5,39 +5,19 @@ import {variance} from '../../core';
 import {EmptyContent} from './EmptyContent';
 import {FlatList} from 'react-native-gesture-handler';
 import {StyleSheet, View} from 'react-native';
-import {Locale} from '../../core/Localization';
 import {ChatItem} from './ChatItem';
-import {Chat} from './types';
 import {PADDING} from '../constants';
+import {Chat} from '../../core/ChatsService';
 
 export type ChatsScreenProps = {
   onCreatePress(): void;
   onChatPress(): void;
+  getChats(): Chat[];
 };
 
-const CHATS: Chat[] = [
-  {
-    topic: 'Travel and Tourism',
-    difficulty: 1,
-    grammarCheck: false,
-    language: Locale.English,
-  },
-  {
-    topic: 'Technology and Innovation',
-    difficulty: 0,
-    grammarCheck: true,
-    language: Locale.English,
-  },
-  {
-    topic: 'Travel and Tourism',
-    difficulty: 1,
-    grammarCheck: false,
-    language: Locale.English,
-  },
-];
-
 export const ChatsScreen = observer(
-  ({onCreatePress, onChatPress}: ChatsScreenProps) => {
+  ({onCreatePress, onChatPress, getChats}: ChatsScreenProps) => {
+    const chats = getChats();
     const renderItem = useCallback(
       ({item}: {item: Chat}) => <ChatItem onPress={onChatPress} item={item} />,
       [onChatPress],
@@ -46,13 +26,13 @@ export const ChatsScreen = observer(
       <RootLayout level="4">
         <FlatList
           contentContainerStyle={styles.container}
-          data={CHATS}
+          data={chats}
           renderItem={renderItem}
           ListEmptyComponent={<EmptyContent onCreatePress={onCreatePress} />}
           ItemSeparatorComponent={Divider}
           ListFooterComponentStyle={styles.footer}
         />
-        <Footer onCreatePress={onCreatePress} />
+        {chats.length !== 0 && <Footer onCreatePress={onCreatePress} />}
       </RootLayout>
     );
   },

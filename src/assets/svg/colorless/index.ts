@@ -36,3 +36,5 @@ export {default as HeadsetSvg} from './headset.svg';
 export {default as StarSvg} from './star.svg';
 export {default as CircleSvg} from './circle.svg';
 export {default as SquareSvg} from './square.svg';
+export {default as PlaySvg} from './play.svg';
+export {default as PauseSvg} from './pause.svg';

@@ -100,9 +100,6 @@ export const CreateChatScreen = observer(
 
             <Controller
               control={control}
-              rules={{
-                required: true,
-              }}
               render={({field: {onChange, onBlur, value}}) => (
                 <Toggle
                   style={styles.toggle}

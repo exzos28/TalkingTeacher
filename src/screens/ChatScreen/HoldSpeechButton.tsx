@@ -23,7 +23,7 @@ export const HoldSpeechButton = observer(
         {isSpeaking ? (
           <Animation />
         ) : (
-          <ButtonText category="c2">Hold & Speech</ButtonText>
+          <ButtonText category="c2">Hold & Talk</ButtonText>
         )}
       </ContentButton>
     );
