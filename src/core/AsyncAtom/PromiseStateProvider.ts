@@ -3,6 +3,8 @@ import {PromiseResult, PromiseState} from './PromiseState';
 
 export interface PromiseStateProvider<R, E> {
   readonly state: PromiseState<R, E | PromiseCancellationError> | undefined;
-  fetch(): Promise<PromiseResult<R, E | PromiseCancellationError>>;
+  fetch(
+    soft?: boolean,
+  ): Promise<PromiseResult<R, E | PromiseCancellationError>>;
   cancel(): void;
 }

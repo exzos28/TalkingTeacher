@@ -39,8 +39,12 @@ export default class PromiseStateProviderImpl<R, E>
     });
   }
 
-  async fetch(): Promise<PromiseResult<R, E | PromiseCancellationError>> {
-    this._setState(PromiseStateProviderImpl.PENDING_STATE);
+  async fetch(
+    soft = false,
+  ): Promise<PromiseResult<R, E | PromiseCancellationError>> {
+    if (!soft) {
+      this._setState(PromiseStateProviderImpl.PENDING_STATE);
+    }
 
     const fetch_ = this._fetch()
       .then(res => ({status: FULFILLED, result: res} as const))

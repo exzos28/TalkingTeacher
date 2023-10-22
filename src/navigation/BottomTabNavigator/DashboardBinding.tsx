@@ -12,6 +12,9 @@ export default observer(function DashboardBinding({
     () => navigation.navigate('CreateChat'),
     [navigation],
   );
-  const goToChat = useCallback(() => navigation.navigate('Chat'), [navigation]);
+  const goToChat = useCallback(
+    (chatId: string) => navigation.navigate('Chat', {chatId}),
+    [navigation],
+  );
   return <ChatsContainer goToChat={goToChat} goToCreateChat={goToCreateChat} />;
 });

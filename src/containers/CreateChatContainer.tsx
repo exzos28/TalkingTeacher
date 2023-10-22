@@ -9,17 +9,17 @@ export type CreateChatContainerProps = {
 
 export const CreateChatContainer = observer(
   ({goBack}: CreateChatContainerProps) => {
-    const {chats, translation} = useRoot();
+    const {chats, settings} = useRoot();
     const submit = useCallback(
       async (values: CreateChatValues) => {
         const config = {
           ...values,
-          language: translation.locale,
+          language: settings.studiedLanguage,
         };
         await chats.createChat(config);
         goBack();
       },
-      [chats, goBack, translation],
+      [chats, goBack, settings],
     );
     return <CreateChatScreen onSubmit={submit} />;
   },

@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList, RectButton} from 'react-native-gesture-handler';
-import {StyleSheet, View} from 'react-native';
+import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {Input, Layout} from '@ui-kitten/components';
 import {sized, useTheme, variance} from '../../core';
 import {PADDING} from '../constants';
@@ -9,8 +9,7 @@ import {ArrowRightSvg} from '../../assets/svg/colorless';
 import {HoldSpeechButton} from './HoldSpeechButton';
 import {observer} from 'mobx-react-lite';
 import {Message as MessageComponent} from './Message';
-import {range} from 'lodash';
-import {nanoid} from 'nanoid/non-secure';
+import {Message} from '../../core/ChatsService';
 
 export type ChatScreenProps = {
   isSpeaking: boolean;
@@ -18,19 +17,11 @@ export type ChatScreenProps = {
   onSpeechFinish(): void;
   message: string;
   onChangeMessage(message: string): void;
+  messages: Message[];
+  onSendMessagePress(): void;
 };
 
-const TEXT =
-  'To create a small application where you can interact with me and send new messages, you will need to combine the use of the GPT-3.5 (or other version) API with UI and backend development for your application. ';
-
-const MESSAGES: Message[] = range(10).map(_ =>
-  _ % 2
-    ? {text: TEXT, id: nanoid(10), from: 'user'}
-    : {text: TEXT, id: nanoid(10), from: 'assistant'},
-);
-
-type Message = {id: string; text: string; from: 'user' | 'assistant'};
-
+// TODO: l10n
 export const ChatScreen = observer(
   ({
     onSpeechFinish,
@@ -38,13 +29,15 @@ export const ChatScreen = observer(
     isSpeaking,
     message,
     onChangeMessage,
+    messages,
+    onSendMessagePress,
   }: ChatScreenProps) => {
     const renderItem = useCallback(
       ({item}: {item: Message}) => (
         <MessageComponent
-          inverted={item.from === 'user'}
-          text={item.text}
-          playPossible={item.from === 'assistant'}
+          inverted={item.role === 'user'}
+          text={item.content}
+          playPossible={item.role === 'assistant'}
           isPlaying={false}
         />
       ),
@@ -53,41 +46,47 @@ export const ChatScreen = observer(
     const theme = useTheme();
     return (
       <RootLayout level="4">
-        <RootSafeAreaView edges={['bottom']}>
-          <FlatList
-            contentContainerStyle={styles.container}
-            inverted
-            data={MESSAGES}
-            renderItem={renderItem}
-          />
-          <FooterView>
-            <View>
-              <Input
-                value={message}
-                onChangeText={onChangeMessage}
-                textStyle={styles.input}
-                placeholder="Typing..."
-                multiline
-              />
-              {message ? (
-                <SendButtonView>
-                  <SendButton hitSlop={10}>
-                    <ArrowRightIcon
-                      color={theme.palette['color-primary-500']}
-                    />
-                  </SendButton>
-                </SendButtonView>
-              ) : null}
-            </View>
-            <SpeakButtonView>
-              <HoldSpeechButton
-                onSpeechFinish={onSpeechFinish}
-                onSpeechStart={onSpeechStart}
-                isSpeaking={isSpeaking}
-              />
-            </SpeakButtonView>
-          </FooterView>
-        </RootSafeAreaView>
+        <KeyboardAvoidingView
+          style={{flex: 1}}
+          enabled={Platform.OS === 'ios'}
+          behavior="height">
+          <RootSafeAreaView edges={['bottom']}>
+            <FlatList
+              contentContainerStyle={styles.container}
+              inverted
+              data={messages}
+              renderItem={renderItem}
+            />
+            <FooterView>
+              <View>
+                <Input
+                  disabled={isSpeaking}
+                  value={message}
+                  onChangeText={onChangeMessage}
+                  textStyle={styles.input}
+                  placeholder="Typing..."
+                  multiline
+                />
+                {message ? (
+                  <SendButtonView>
+                    <SendButton onPress={onSendMessagePress} hitSlop={10}>
+                      <ArrowRightIcon
+                        color={theme.palette['color-primary-500']}
+                      />
+                    </SendButton>
+                  </SendButtonView>
+                ) : null}
+              </View>
+              <SpeakButtonView>
+                <HoldSpeechButton
+                  onSpeechFinish={onSpeechFinish}
+                  onSpeechStart={onSpeechStart}
+                  isSpeaking={isSpeaking}
+                />
+              </SpeakButtonView>
+            </FooterView>
+          </RootSafeAreaView>
+        </KeyboardAvoidingView>
       </RootLayout>
     );
   },

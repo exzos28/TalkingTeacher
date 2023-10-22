@@ -33,7 +33,7 @@ export type CreateChatValues = {
 
 export const CreateChatScreen = observer(
   ({onSubmit}: CreateChatScreenProps) => {
-    const defaultTopic = useMemo(() => sample(TOPICS.get(Locale.English)), []);
+    const defaultTopic = useMemo(() => sample(TOPICS.get(Locale.Russian)), []);
     const form = useForm<CreateChatValues>({
       defaultValues: {
         topic: defaultTopic,

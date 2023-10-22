@@ -6,7 +6,7 @@ import {FULFILLED} from '../core/AsyncAtom';
 
 export type ChatsContainerProps = {
   goToCreateChat(): void;
-  goToChat(): void;
+  goToChat(chatId: string): void;
 };
 
 export const ChatsContainer = observer(

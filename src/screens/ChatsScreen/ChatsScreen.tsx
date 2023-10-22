@@ -11,7 +11,7 @@ import {Chat} from '../../core/ChatsService';
 
 export type ChatsScreenProps = {
   onCreatePress(): void;
-  onChatPress(): void;
+  onChatPress(chatId: string): void;
   getChats(): Chat[];
 };
 
@@ -19,7 +19,9 @@ export const ChatsScreen = observer(
   ({onCreatePress, onChatPress, getChats}: ChatsScreenProps) => {
     const chats = getChats();
     const renderItem = useCallback(
-      ({item}: {item: Chat}) => <ChatItem onPress={onChatPress} item={item} />,
+      ({item}: {item: Chat}) => (
+        <ChatItem onPress={() => onChatPress(item.id)} item={item} />
+      ),
       [onChatPress],
     );
     return (

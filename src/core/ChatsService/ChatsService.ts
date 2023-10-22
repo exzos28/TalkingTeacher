@@ -28,7 +28,7 @@ export default class ChatsService implements Service, Chats {
     }
     const chats = this.state.result;
     const newChat = {...config, id: nanoid(10)};
-    chats.push(newChat);
+    chats.unshift(newChat);
     await this._root.jsonKeyValueStore.set('chats', chats);
     await this._chatsProvider.fetch();
   }, this);
