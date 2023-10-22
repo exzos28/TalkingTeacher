@@ -1,10 +1,15 @@
-import {Url} from '../units';
+import {Email, Url} from '../units';
 import {Millisecond} from '../Time';
 
 export type ConfigurationValues = {
   eulaLink: Url;
   privacyLink: Url;
   termsLink: Url;
+
+  playStoreUrl: Url;
+  appStoreUrl: Url;
+
+  feedbackMail: Email;
 
   restApiUrl: Url;
   restApiTimeout: Millisecond;

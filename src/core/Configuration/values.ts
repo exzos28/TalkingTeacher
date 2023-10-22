@@ -1,11 +1,17 @@
 import {ConfigurationValues} from './ConfigurationValues';
-import {Url} from '../units';
+import {Email, Url} from '../units';
 import {Millisecond} from '../Time';
 
 const values: ConfigurationValues = {
   eulaLink: 'https://likesfaster.com/eula.html/' as Url,
   privacyLink: 'https://likesfaster.com/privacy.html/' as Url,
   termsLink: 'https://likesfaster.com/terms.html/' as Url,
+
+  // TODO: Change
+  playStoreUrl: 'https://google.com/' as Url,
+  appStoreUrl: 'https://google.com/' as Url,
+
+  feedbackMail: 'oleksandr.kurinnyi.dev@gmail.com' as Email,
 
   restApiUrl: 'https://api.likesfaster.com/api/' as Url,
   restApiTimeout: 10000 as Millisecond,

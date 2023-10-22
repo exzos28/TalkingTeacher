@@ -31,3 +31,8 @@ export {default as CloseSvg} from './close.svg';
 export {default as BellRingSvg} from './bell-ring.svg';
 export {default as ShoppingBagSvg} from './shopping-bag.svg';
 export {default as ArrowRightSvg} from './arrow-right.svg';
+export {default as SettingsSvg} from './settings.svg';
+export {default as HeadsetSvg} from './headset.svg';
+export {default as StarSvg} from './star.svg';
+export {default as CircleSvg} from './circle.svg';
+export {default as SquareSvg} from './square.svg';

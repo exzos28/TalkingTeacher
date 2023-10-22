@@ -1,7 +1,7 @@
-export {default as LogoTextSvg} from './logo-text.svg';
-export {default as WhiteLogoSvg} from './white-logo.svg';
-export {default as PickaxeSvg} from './pickaxe.svg';
-export {default as FlashSvg} from './flash.svg';
-export {default as RoboxTextSvg} from './robox-text.svg';
-export {default as CircleRunnerSvg} from './circle-runner.svg';
-export {default as NcwalletSvg} from './ncwallet.svg';
+export {default as EnglishSvg} from './english.svg';
+export {default as FranceSvg} from './france.svg';
+export {default as GermanSvg} from './german.svg';
+export {default as ItalianSvg} from './italian.svg';
+export {default as PortugueseSvg} from './portuguese.svg';
+export {default as RussiaSvg} from './russia.svg';
+export {default as SpainSvg} from './spain.svg';

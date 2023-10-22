@@ -1,9 +1,12 @@
 import {SettingsRecord} from './Settings';
 import {define, SETTINGS} from '../persistence';
+import {ChatType} from '../../types';
 
 export default abstract class SettingsStatic {
   static defaultSettings: Required<SettingsRecord> = {
     studiedLanguage: 'en',
+    isAutomaticallyPlayed: false,
+    chatType: ChatType.Chat,
   };
 
   static async setSettings(record: SettingsRecord) {

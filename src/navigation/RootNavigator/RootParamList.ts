@@ -1,7 +1,10 @@
+import {BottomTabParamList} from '../BottomTabNavigator';
+import {NavigatorScreenParams} from '@react-navigation/native';
+
 export type RootParamList = {
-  Root: undefined;
+  Root: NavigatorScreenParams<BottomTabParamList>;
   CreateChat: undefined;
   Chat: undefined;
-  Settings: undefined;
   Log: undefined;
+  PickLanguageForSettings: undefined;
 };

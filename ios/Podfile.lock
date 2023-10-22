@@ -30,6 +30,8 @@ PODS:
     - ExpoModulesCore
   - ExpoSharing (11.7.0):
     - ExpoModulesCore
+  - ExpoStoreReview (6.6.0):
+    - ExpoModulesCore
   - ExpoWebBrowser (12.3.2):
     - ExpoModulesCore
   - FBLazyVector (0.72.6)
@@ -599,6 +601,7 @@ DEPENDENCIES:
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
   - ExpoSecureStore (from `../node_modules/expo-secure-store/ios`)
   - ExpoSharing (from `../node_modules/expo-sharing/ios`)
+  - ExpoStoreReview (from `../node_modules/expo-store-review/ios`)
   - ExpoWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -725,6 +728,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-secure-store/ios"
   ExpoSharing:
     :path: "../node_modules/expo-sharing/ios"
+  ExpoStoreReview:
+    :path: "../node_modules/expo-store-review/ios"
   ExpoWebBrowser:
     :path: "../node_modules/expo-web-browser/ios"
   FBLazyVector:
@@ -845,6 +850,7 @@ SPEC CHECKSUMS:
   ExpoModulesCore: 51cb2e7ab4c8da14be3f40b66d54c1781002e99d
   ExpoSecureStore: 57db3b6da8b59046e2057e95bf7738a8027b47c3
   ExpoSharing: 5366dab0e9a270a6da3acbb1e3471d5522044baf
+  ExpoStoreReview: 6a63b9ae177bc6b46ec1679eb800ecc8a83a649a
   ExpoWebBrowser: 2c788f9c07718a780fe6d8bf2f6195c47609faaa
   FBLazyVector: 748c0ef74f2bf4b36cfcccf37916806940a64c32
   FBReactNativeSpec: 966f29e4e697de53a3b366355e8f57375c856ad9

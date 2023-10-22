@@ -1,5 +1,5 @@
 import {Locale} from './core/Localization';
-import {DeFlagSvg, EnFlagSvg, RuFlagSvg} from './assets/svg';
+import {GermanSvg, EnglishSvg, RussiaSvg} from './assets/svg/colored';
 
 export const TOPICS: Map<Locale, string[]> = new Map([
   [
@@ -52,7 +52,7 @@ export const LANGUAGES = new Map([
   [
     Locale.English,
     {
-      Icon: EnFlagSvg,
+      Icon: EnglishSvg,
       text: 'English',
       value: Locale.English,
     },
@@ -60,7 +60,7 @@ export const LANGUAGES = new Map([
   [
     Locale.German,
     {
-      Icon: DeFlagSvg,
+      Icon: GermanSvg,
       text: 'Deutsch',
       value: Locale.German,
     },
@@ -68,7 +68,7 @@ export const LANGUAGES = new Map([
   [
     Locale.Russian,
     {
-      Icon: RuFlagSvg,
+      Icon: RussiaSvg,
       text: 'Русский',
       value: Locale.Russian,
     },

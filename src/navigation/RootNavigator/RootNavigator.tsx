@@ -1,11 +1,11 @@
 import {observer} from 'mobx-react-lite';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import SettingsBinding from './SettingsBinding';
 import {BottomTabBinding} from './BottomTabBinding';
 import {RootParamList} from './RootParamList';
 import CreateChatBinding from './CreateChatBinding';
 import ChatBinding from './ChatBinding';
+import PickLanguageForSettingsBinding from './PickLanguageForSettingsBinding';
 
 const {Navigator, Screen} = createStackNavigator<RootParamList>();
 
@@ -29,7 +29,11 @@ export const RootNavigator = observer(() => {
         options={{title: 'Create chat'}}
       />
       <Screen name="Chat" component={ChatBinding} options={{title: 'Chat'}} />
-      <Screen name="Settings" component={SettingsBinding} />
+      <Screen
+        name="PickLanguageForSettings"
+        component={PickLanguageForSettingsBinding}
+        options={{title: 'Select language', headerBackTitleVisible: false}}
+      />
     </Navigator>
   );
 });

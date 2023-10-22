@@ -2,13 +2,12 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import {ChatScreen} from '../screens/ChatScreen';
 import Voice from '@react-native-voice/voice';
-import {SpeechResultsEvent} from '@react-native-voice/voice/src/VoiceModuleTypes';
+import {SpeechResultsEvent} from '@react-native-voice/voice';
 
 export const ChatContainer = observer(() => {
   const [pressed, setPressed] = useState(false);
   const [value, setValue] = useState('');
   const onSpeechResultsHandler = useCallback((result: SpeechResultsEvent) => {
-    console.log(result);
     const newValue = result.value?.join() ?? '';
     setValue(newValue);
   }, []);
@@ -19,9 +18,8 @@ export const ChatContainer = observer(() => {
     };
   }, [onSpeechResultsHandler]);
   const start = useCallback(async () => {
-    console.log('start');
     setPressed(true);
-    await Voice.start('ru');
+    await Voice.start('en');
   }, []);
   const end = useCallback(() => {
     setPressed(false);

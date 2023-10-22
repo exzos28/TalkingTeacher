@@ -45,9 +45,7 @@ export default observer(function LanguageList(props: LanguageListProps) {
 });
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 15,
-  },
+  container: {},
 });
 
 export type ListProps = FlatListProps<ReadonlyDeep<ListItem>>;

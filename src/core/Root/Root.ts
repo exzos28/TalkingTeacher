@@ -21,11 +21,14 @@ import {ConfigurationValues} from '../Configuration/ConfigurationValues';
 import {Flags} from '../Flags';
 import {ManualTestHelper} from '../ManualTestHelper';
 import {Settings} from '../Settings';
+import {AppWindow, AppWindowState} from '../AppWindow';
 
 export interface Root {
   readonly flags: Flags;
   readonly appearance: Appearance<Theme>;
   readonly sharing: Sharing;
+  readonly appWindow: AppWindow;
+  readonly appWindowState: AppWindowState;
   readonly navigationContainer: NavigationContainer<RootParamList>;
   readonly navigationContainerTheme: NavigationContainerTheme;
   readonly navigationContainerBinding: NavigationContainerBinding;

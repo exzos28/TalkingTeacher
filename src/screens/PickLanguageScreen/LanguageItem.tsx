@@ -1,11 +1,12 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {observer} from 'mobx-react-lite';
 import {sized, useTheme, variance} from '../../core';
+import {Text} from '@ui-kitten/components';
 import {SvgProps} from 'react-native-svg';
 import {Locale} from '../../core/Localization';
 import {RippleButton} from '../../components/RippleButton';
-import {CheckSvg} from '../../assets/svg';
+import {CheckSvg} from '../../assets/svg/colorless';
 
 export type ListItem = {
   Icon: React.ComponentType<SvgProps>;
@@ -44,7 +45,7 @@ const Root = variance(RippleButton)(() => ({
     height: 70,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 15,
+    paddingHorizontal: 30,
     paddingVertical: 20,
   },
 }));
