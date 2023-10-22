@@ -6,9 +6,9 @@ import {useRoot, useStrings} from '../../core/Root/hooks';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SelectedLanguage} from './SelectedLanguage';
 import {Gutter, Space} from '../../components/basic';
-import {LANGUAGES} from '../../core/Localization/LANGUAGES';
 import {Locale} from '../../core/Localization';
 import {runInAction} from 'mobx';
+import {LANGUAGES} from '../../DATA';
 
 export type WelcomeLanguagesScreenProps = {
   pickLanguage(): Promise<Locale | undefined>;
@@ -19,7 +19,7 @@ export default observer(function WelcomeLanguagesScreen({
   pickLanguage,
   onNextPress,
 }: WelcomeLanguagesScreenProps) {
-  const {translation, preferences} = useRoot();
+  const {translation, preferences, settings} = useRoot();
   const strings = useStrings();
   const values = useMemo(() => [...LANGUAGES.values()], []);
   const keys = useMemo(() => [...LANGUAGES.keys()], []);
@@ -54,7 +54,8 @@ export default observer(function WelcomeLanguagesScreen({
       setCurrentLanguage(findNextLanguage(newNext));
     }
     setNextLanguage(newNext);
-  }, [currentLanguage, findNextLanguage, pickLanguage, values]);
+    await settings.setStudiedLanguage(values[newNext].value);
+  }, [currentLanguage, findNextLanguage, pickLanguage, settings, values]);
   const currentSelected = values[currentLanguage];
   const nextSelected = values[nextLanguage];
   return (

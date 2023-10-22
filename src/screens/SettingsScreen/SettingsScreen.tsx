@@ -6,7 +6,8 @@ import ListItem from './ListItem';
 import {expr} from 'mobx-utils';
 import {View} from 'react-native';
 import {useRoot, useStrings} from '../../core/Root/hooks';
-import {LANGUAGES} from '../../core/Localization/LANGUAGES';
+
+import {LANGUAGES} from '../../DATA';
 
 export type SettingsScreenProps = {
   goToChooseLanguage: () => void;

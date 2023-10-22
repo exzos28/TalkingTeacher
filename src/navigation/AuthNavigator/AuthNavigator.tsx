@@ -10,6 +10,7 @@ import {FULFILLED} from '../../core/AsyncAtom';
 
 const {Navigator, Screen} = createStackNavigator<AuthParamList>();
 
+// TODO: l10n
 export default observer(function AuthStack() {
   const {flags} = useRoot();
   if (flags.state?.status !== FULFILLED) {
@@ -37,7 +38,7 @@ export default observer(function AuthStack() {
       <Screen
         name="PickLanguageForWelcomeLanguages"
         component={PickLanguageForWelcomeLanguagesBinding}
-        options={{title: '', headerBackTitle: 'Back'}}
+        options={{title: 'Select language', headerBackTitleVisible: false}}
       />
     </Navigator>
   );

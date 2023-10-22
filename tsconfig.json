@@ -2,13 +2,14 @@
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "lib": ["DOM"],
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "./mobx.d.ts",
     "./env.d.ts",
-    "./imports.d.ts",
+    "./imports.d.ts"
   ]
 }

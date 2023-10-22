@@ -23,8 +23,8 @@ export default class NavigationContainerThemeImpl
         ...DefaultTheme.colors,
         primary: palette['color-primary-500'],
         background: palette['background-basic-color-4'],
-        card: palette['background-basic-color-2'],
-        border: palette['border-basic-color-1'],
+        card: palette['background-basic-color-1'],
+        border: palette['border-basic-color-5'],
         text: palette['text-basic-color'],
       },
     };

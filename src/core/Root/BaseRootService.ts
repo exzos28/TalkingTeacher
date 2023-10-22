@@ -30,6 +30,7 @@ import {DebugLocationDetectorService} from '../DebugLocationDetector';
 import {Sharing} from '../Sharing';
 import {ManualTestHelperImpl} from '../ManualTestHelper';
 import {FlagsService} from '../Flags';
+import {SettingsService} from '../Settings';
 
 export default abstract class BaseRootService implements Root, Service {
   constructor(protected readonly _core: Core) {}
@@ -42,6 +43,7 @@ export default abstract class BaseRootService implements Root, Service {
   readonly localization = new LocalizationService(this);
 
   readonly preferences = new PreferencesService();
+  readonly settings = new SettingsService();
   readonly json = new JsonImpl();
   readonly translation = new TranslationService(this);
 
@@ -88,6 +90,7 @@ export default abstract class BaseRootService implements Root, Service {
       this.flags.subscribe(),
       this.localization.subscribe(),
       this.preferences.subscribe(),
+      this.settings.subscribe(),
       this.windowDimensions.subscribe(),
       this.windowDimensionsState.subscribe(),
       this.appearance.subscribe(),

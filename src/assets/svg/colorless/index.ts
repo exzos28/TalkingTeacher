@@ -30,3 +30,4 @@ export {default as NCWalletSvg} from './ncwallet.svg';
 export {default as CloseSvg} from './close.svg';
 export {default as BellRingSvg} from './bell-ring.svg';
 export {default as ShoppingBagSvg} from './shopping-bag.svg';
+export {default as ArrowRightSvg} from './arrow-right.svg';

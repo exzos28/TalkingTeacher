@@ -4,7 +4,7 @@ import {Text} from '@ui-kitten/components';
 import React from 'react';
 import {SvgProps} from 'react-native-svg';
 import {sized, useTheme, variance} from '../../core';
-import {BorderlessButton} from 'react-native-gesture-handler';
+import {RectButton} from 'react-native-gesture-handler';
 import {AngleDownSvg} from '../../assets/svg/colorless';
 
 export type SelectedLanguageProps = {
@@ -35,7 +35,7 @@ export const SelectedLanguage = observer((props: SelectedLanguageProps) => {
 
 const AngleDownIcon = sized(AngleDownSvg, 30);
 
-const RootButton = variance(BorderlessButton)(theme => ({
+const RootButton = variance(RectButton)(theme => ({
   root: {
     flexDirection: 'row',
     alignItems: 'center',

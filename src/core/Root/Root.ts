@@ -20,6 +20,7 @@ import {LogExporter} from '../LogExporter';
 import {ConfigurationValues} from '../Configuration/ConfigurationValues';
 import {Flags} from '../Flags';
 import {ManualTestHelper} from '../ManualTestHelper';
+import {Settings} from '../Settings';
 
 export interface Root {
   readonly flags: Flags;
@@ -36,6 +37,7 @@ export interface Root {
   readonly log: Log;
   readonly logExporter: LogExporter;
   readonly preferences: Preferences;
+  readonly settings: Settings;
   readonly translation: Translation<Locale, LocaleDict>;
   readonly windowDimensionsState: WindowDimensionsState;
   readonly location: Location;

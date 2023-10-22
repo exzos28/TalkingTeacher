@@ -6,8 +6,8 @@ import {ReadonlyDeep} from 'type-fest';
 import {Divider} from '@ui-kitten/components';
 import {Locale} from '../../core/Localization';
 import {FlatList} from 'react-native-gesture-handler';
-import {LANGUAGES} from '../../core/Localization/LANGUAGES';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {LANGUAGES} from '../../DATA';
 
 export type LanguageListProps = {
   onSelect(locale: Locale): void;
