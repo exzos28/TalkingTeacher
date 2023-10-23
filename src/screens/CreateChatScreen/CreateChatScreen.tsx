@@ -17,7 +17,7 @@ import {Gutter, Space} from '../../components/basic';
 import {PADDING} from '../constants';
 import {Controller, useForm} from 'react-hook-form';
 import {sample} from 'lodash';
-import {useDifficulty} from '../../useDifficulty';
+import {Difficulty, useDifficulty} from '../../useDifficulty';
 import {TOPICS} from '../../containers/CreateChatContainer/TOPICS';
 import {Language} from '../../core';
 import {useStrings} from '../../core/Root/hooks';
@@ -30,7 +30,7 @@ export type CreateChatScreenProps = {
 
 export type CreateChatValues = {
   topic: string;
-  difficulty: number;
+  difficulty: Difficulty;
   grammarCheck: boolean;
 };
 
@@ -44,7 +44,7 @@ export const CreateChatScreen = observer(
     const form = useForm<CreateChatValues>({
       defaultValues: {
         topic: defaultTopic,
-        difficulty: 1,
+        difficulty: Difficulty.Light,
         grammarCheck: true,
       },
     });

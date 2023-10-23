@@ -39,6 +39,7 @@ const ru = {
   'chat.holdTalk': 'Удерживать и говорить',
 
   'chats.createChat': 'Создать чат',
+  'chats.item.grammar': 'Грамматика',
 
   'createChat.topic': 'Тема:',
   'createChat.topicPlaceholder': 'Тема, о которой вы хотите поговорить',

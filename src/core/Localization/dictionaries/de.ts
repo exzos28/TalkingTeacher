@@ -38,6 +38,7 @@ const de = {
   'chat.holdTalk': 'Halten & Sprechen',
 
   'chats.createChat': 'Chat erstellen',
+  'chats.item.grammar': 'Grammatik',
 
   'createChat.topic': 'Thema:',
   'createChat.topicPlaceholder': 'Das Thema, über das Sie sprechen möchten',

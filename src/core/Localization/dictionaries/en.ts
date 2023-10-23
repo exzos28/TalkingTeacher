@@ -39,6 +39,7 @@ const en = {
   'chat.holdTalk': 'Hold & Talk',
 
   'chats.createChat': 'Create chat',
+  'chats.item.grammar': 'Grammar',
 
   'createChat.topic': 'Topic:',
   'createChat.topicPlaceholder': 'The topic you want to talk about',

@@ -1,10 +1,16 @@
+import {useStrings} from './core/Root/hooks';
+
 export enum Difficulty {
   Light,
   Medium,
   Heavy,
 }
 
-// TODO: l10n
 export const useDifficulty = () => {
-  return ['Light', 'Medium', 'Heavy'];
+  const strings = useStrings();
+  return [
+    strings['difficulty.light'],
+    strings['difficulty.medium'],
+    strings['difficulty.heavy'],
+  ];
 };

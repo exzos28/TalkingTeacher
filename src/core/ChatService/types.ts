@@ -1,4 +1,5 @@
 import {Language} from '../Language';
+import {Difficulty} from '../../useDifficulty';
 
 export type Chat = ChatConfig & {
   id: string;
@@ -7,7 +8,7 @@ export type Chat = ChatConfig & {
 export type ChatConfig = {
   topic: string;
   language: Language;
-  difficulty: number;
+  difficulty: Difficulty;
   grammarCheck: boolean;
 };
 

@@ -10,16 +10,17 @@ import {Gutter, Space} from '../../components/basic';
 import {AngleRightSvg} from '../../assets/svg/colorless';
 import {LANGUAGES} from '../../DATA';
 import {Chat} from '../../core/ChatService';
+import {useStrings} from '../../core/Root/hooks';
 
 export type ChatItemProps = {
   item: Chat;
   onPress(): void;
 };
 
-// TODO: l10n
 export const ChatItem = observer(({item, onPress}: ChatItemProps) => {
   const difficultyValues = useDifficulty();
   const theme = useTheme();
+  const strings = useStrings();
   const language = LANGUAGES.get(item.language)?.text ?? '';
   return (
     <RootLayout>
@@ -29,7 +30,7 @@ export const ChatItem = observer(({item, onPress}: ChatItemProps) => {
             <TitleText category="c2">{item.topic}</TitleText>
             <Text category="c1">
               {language} • {difficultyValues[item.difficulty]} •{' '}
-              {item.grammarCheck ? '✓' : '×'} Grammar
+              {item.grammarCheck ? '✓' : '×'} {strings['chats.item.grammar']}
             </Text>
           </Space>
           <AngleRightIcon color={theme.palette['color-primary-400']} />
