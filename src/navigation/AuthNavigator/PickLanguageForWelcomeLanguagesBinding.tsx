@@ -1,8 +1,8 @@
 import React, {useCallback} from 'react';
 import {observer} from 'mobx-react-lite';
 import {AuthStackBindingProps} from './AuthStackBindingProps';
-import {Locale} from '../../core/Localization';
 import {PickLanguageContainer} from '../../containers/PickLanguageContainer';
+import {Language} from '../../core/Language';
 
 export type PickLanguageForWelcomeStep1BindingProps =
   AuthStackBindingProps<'PickLanguageForWelcomeLanguages'>;
@@ -12,7 +12,7 @@ export default observer(function PickLanguageForWelcomeLanguagesBinding(
 ) {
   const {navigation} = props;
   const onSelect = useCallback(
-    (value: Locale) =>
+    (value: Language) =>
       navigation.navigate('WelcomeLanguages', {pickedLanguage: value}),
     [navigation],
   );

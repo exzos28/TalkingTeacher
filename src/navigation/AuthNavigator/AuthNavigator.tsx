@@ -5,14 +5,14 @@ import WelcomeLanguagesBinding from './WelcomeLanguagesBinding';
 import {AuthParamList} from './AuthParamList';
 import PickLanguageForWelcomeLanguagesBinding from './PickLanguageForWelcomeLanguagesBinding';
 import WelcomeInfoAppBinding from './WelcomeInfoAppBinding';
-import {useRoot} from '../../core/Root/hooks';
+import {useRoot, useStrings} from '../../core/Root/hooks';
 import {FULFILLED} from '../../core/AsyncAtom';
 
 const {Navigator, Screen} = createStackNavigator<AuthParamList>();
 
-// TODO: l10n
 export default observer(function AuthStack() {
   const {flags} = useRoot();
+  const strings = useStrings();
   if (flags.state?.status !== FULFILLED) {
     return null;
   }
@@ -25,20 +25,23 @@ export default observer(function AuthStack() {
         name="WelcomeInfoApp"
         component={WelcomeInfoAppBinding}
         options={() => ({
-          headerShown: false,
+          title: strings['navigation.welcome'],
         })}
       />
       <Screen
         name="WelcomeLanguages"
         component={WelcomeLanguagesBinding}
         options={() => ({
-          headerShown: false,
+          title: strings['navigation.languages'],
         })}
       />
       <Screen
         name="PickLanguageForWelcomeLanguages"
         component={PickLanguageForWelcomeLanguagesBinding}
-        options={{title: 'Select language', headerBackTitleVisible: false}}
+        options={{
+          title: strings['navigation.selectLanguage'],
+          headerBackTitleVisible: false,
+        }}
       />
     </Navigator>
   );

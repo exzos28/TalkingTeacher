@@ -12,10 +12,19 @@ export type MessageProps = {
   isPlaying: boolean;
   inverted: boolean;
   text: string;
+  onPlayPress(): void;
+  onPausePress(): void;
 };
 
 export const Message = observer(
-  ({inverted, playPossible, isPlaying, text}: MessageProps) => {
+  ({
+    inverted,
+    playPossible,
+    isPlaying,
+    text,
+    onPlayPress,
+    onPausePress,
+  }: MessageProps) => {
     const {windowDimensionsState} = useRoot();
     const width = windowDimensionsState.window.width;
     return (
@@ -27,7 +36,11 @@ export const Message = observer(
             </TextView>
             {playPossible && (
               <PlayView>
-                <PlayPause isPlaying={isPlaying} />
+                <PlayPause
+                  onPlayPress={onPlayPress}
+                  onPausePress={onPausePress}
+                  isPlaying={isPlaying}
+                />
               </PlayView>
             )}
           </ContentView>

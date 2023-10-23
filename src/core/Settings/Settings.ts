@@ -1,9 +1,10 @@
 import {Bound} from '../fp';
 import {ChatType} from '../../types';
+import {Language} from '../Language';
 
 export interface Settings {
-  readonly studiedLanguage: string;
-  setStudiedLanguage: Bound<(language: string) => Promise<void>, Settings>;
+  readonly studiedLanguage: Language;
+  setStudiedLanguage: Bound<(language: Language) => Promise<void>, Settings>;
   readonly chatType: ChatType;
   setChatType: Bound<(type: ChatType) => Promise<void>, Settings>;
   readonly isAutomaticallyPlayed: boolean;
@@ -11,7 +12,7 @@ export interface Settings {
 }
 
 export type SettingsRecord = {
-  studiedLanguage?: string;
+  studiedLanguage?: Language;
   chatType?: ChatType;
   isAutomaticallyPlayed?: boolean;
 };

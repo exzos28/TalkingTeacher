@@ -3,6 +3,7 @@ import App from './App';
 import {name} from '../package.json';
 import * as Sentry from '@sentry/react-native';
 import {config} from './core/Sentry';
+import TrackPlayer from 'react-native-track-player';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -15,4 +16,5 @@ export default () => {
     Sentry.init(config);
   }
   AppRegistry.registerComponent(name, () => App);
+  TrackPlayer.setupPlayer();
 };

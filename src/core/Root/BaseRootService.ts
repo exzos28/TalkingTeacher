@@ -31,7 +31,9 @@ import {Sharing} from '../Sharing';
 import {ManualTestHelperImpl} from '../ManualTestHelper';
 import {FlagsService} from '../Flags';
 import {SettingsService} from '../Settings';
-import {ChatsService} from '../ChatsService';
+import {ChatRestClientImpl, ChatsService} from '../ChatService';
+import {TextToSpeechRestClientImpl} from '../TextToSpeech';
+import TextToSpeechImpl from '../TextToSpeech/TextToSpeechImpl';
 
 export default abstract class BaseRootService implements Root, Service {
   constructor(protected readonly _core: Core) {}
@@ -86,6 +88,10 @@ export default abstract class BaseRootService implements Root, Service {
 
   readonly manualTestHelper = new ManualTestHelperImpl();
 
+  readonly textToSpeechRestClient = new TextToSpeechRestClientImpl();
+  readonly textToSpeech = new TextToSpeechImpl(this);
+
+  readonly chatRestClient = new ChatRestClientImpl();
   readonly chats = new ChatsService(this);
 
   subscribe() {

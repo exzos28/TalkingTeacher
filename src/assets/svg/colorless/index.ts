@@ -38,3 +38,4 @@ export {default as CircleSvg} from './circle.svg';
 export {default as SquareSvg} from './square.svg';
 export {default as PlaySvg} from './play.svg';
 export {default as PauseSvg} from './pause.svg';
+export {default as ArrowUpSvg} from './arrow-up.svg';

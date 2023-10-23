@@ -1,9 +1,9 @@
-import {Locale} from '../../core/Localization';
+import {Language} from '../../core/Language';
 
 export type AuthParamList = {
   WelcomeLanguages:
     | {
-        pickedLanguage: Locale;
+        pickedLanguage: Language;
       }
     | undefined;
   WelcomeInfoApp: undefined;

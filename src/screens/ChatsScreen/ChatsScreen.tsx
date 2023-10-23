@@ -7,7 +7,8 @@ import {FlatList} from 'react-native-gesture-handler';
 import {StyleSheet, View} from 'react-native';
 import {ChatItem} from './ChatItem';
 import {PADDING} from '../constants';
-import {Chat} from '../../core/ChatsService';
+import {Chat} from '../../core/ChatService';
+import {useStrings} from '../../core/Root/hooks';
 
 export type ChatsScreenProps = {
   onCreatePress(): void;
@@ -47,10 +48,11 @@ export type FooterProps = {
 };
 
 const Footer = observer(({onCreatePress}: FooterProps) => {
+  const strings = useStrings();
   return (
     <FooterView>
       <Button size="giant" onPress={onCreatePress}>
-        Create chat
+        {strings['chats.createChat']}
       </Button>
     </FooterView>
   );

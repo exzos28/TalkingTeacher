@@ -9,8 +9,7 @@ import {View} from 'react-native';
 import {Gutter, Space} from '../../components/basic';
 import {AngleRightSvg} from '../../assets/svg/colorless';
 import {LANGUAGES} from '../../DATA';
-import {Chat} from '../../core/ChatsService';
-import {Locale} from '../../core/Localization';
+import {Chat} from '../../core/ChatService';
 
 export type ChatItemProps = {
   item: Chat;
@@ -21,7 +20,7 @@ export type ChatItemProps = {
 export const ChatItem = observer(({item, onPress}: ChatItemProps) => {
   const difficultyValues = useDifficulty();
   const theme = useTheme();
-  const language = LANGUAGES.get(item.language as Locale)?.text ?? '';
+  const language = LANGUAGES.get(item.language)?.text ?? '';
   return (
     <RootLayout>
       <RectButton onPress={onPress}>

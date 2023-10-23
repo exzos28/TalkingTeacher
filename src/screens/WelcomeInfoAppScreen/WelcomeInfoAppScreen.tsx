@@ -4,6 +4,7 @@ import {variance} from '../../core';
 import {Button, Text} from '@ui-kitten/components';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Gutter, Space} from '../../components/basic';
+import {useStrings} from '../../core/Root/hooks';
 
 export type WelcomeInfoAppScreenProps = {
   onNextPress(): void;
@@ -12,22 +13,21 @@ export type WelcomeInfoAppScreenProps = {
 export default observer(function WelcomeInfoAppScreen({
   onNextPress,
 }: WelcomeInfoAppScreenProps) {
+  const strings = useStrings();
   return (
     <RootSaveAreaView>
       <ContentSpace gutter={Gutter.Large}>
         <Space gutter={Gutter.Middle}>
-          <TitleText category="s1">Привет 👋</TitleText>
+          <TitleText category="s1">{strings['welcomeInfoApp.hello']}</TitleText>
         </Space>
         <Space gutter={Gutter.Middle}>
           <TitleText category="s1">
-            Это виртуальный помощник, который может поддержать разговор или чат
-            абсолютно на любую тему, а также исправить твои грамматические
-            ошибки.
+            {strings['welcomeInfoApp.description']}
           </TitleText>
         </Space>
       </ContentSpace>
       <NextButton onPress={onNextPress} size="medium">
-        Продолжить
+        {strings['welcomeInfoApp.continue']}
       </NextButton>
     </RootSaveAreaView>
   );

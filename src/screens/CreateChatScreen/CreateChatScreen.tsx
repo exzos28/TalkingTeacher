@@ -12,17 +12,20 @@ import {
 } from '@ui-kitten/components';
 import {variance} from '../../core';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {Gutter, Space} from '../../components/basic';
 import {PADDING} from '../constants';
 import {Controller, useForm} from 'react-hook-form';
 import {sample} from 'lodash';
-import {TOPICS} from '../../DATA';
-import {Locale} from '../../core/Localization';
 import {useDifficulty} from '../../useDifficulty';
+import {TOPICS} from '../../containers/CreateChatContainer/TOPICS';
+import {Language} from '../../core';
+import {useStrings} from '../../core/Root/hooks';
 
 export type CreateChatScreenProps = {
   onSubmit(values: CreateChatValues): void;
+  isLoading: boolean;
+  studiedLanguage: Language;
 };
 
 export type CreateChatValues = {
@@ -32,8 +35,12 @@ export type CreateChatValues = {
 };
 
 export const CreateChatScreen = observer(
-  ({onSubmit}: CreateChatScreenProps) => {
-    const defaultTopic = useMemo(() => sample(TOPICS.get(Locale.Russian)), []);
+  ({onSubmit, isLoading, studiedLanguage}: CreateChatScreenProps) => {
+    const strings = useStrings();
+    const defaultTopic = useMemo(
+      () => sample(TOPICS.get(studiedLanguage)),
+      [studiedLanguage],
+    );
     const form = useForm<CreateChatValues>({
       defaultValues: {
         topic: defaultTopic,
@@ -50,7 +57,7 @@ export const CreateChatScreen = observer(
         <ContentSafeAreaView edges={['bottom']}>
           <Space>
             <Space gutter={Gutter.Small}>
-              <Text category="label">Topic:</Text>
+              <Text category="label">{strings['createChat.topic']}</Text>
               <Controller
                 control={control}
                 rules={{
@@ -63,7 +70,7 @@ export const CreateChatScreen = observer(
                   <Input
                     multiline={true}
                     textStyle={styles.inputTextStyle}
-                    placeholder="The topic you want to talk about"
+                    placeholder={strings['createChat.topicPlaceholder']}
                     onChangeText={onChange}
                     onBlur={onBlur}
                     value={value}
@@ -74,7 +81,7 @@ export const CreateChatScreen = observer(
               />
             </Space>
             <Space gutter={Gutter.Small}>
-              <Text category="label">Difficulty of speech:</Text>
+              <Text category="label">{strings['createChat.difficulty']}</Text>
               <Controller
                 control={control}
                 rules={{
@@ -106,16 +113,23 @@ export const CreateChatScreen = observer(
                   checked={value}
                   onBlur={onBlur}
                   onChange={onChange}>
-                  Grammar check
+                  {strings['createChat.grammarCheck']}
                 </Toggle>
               )}
               name="grammarCheck"
             />
           </Space>
           <ButtonView>
-            <Button size="giant" onPress={handleSubmit(onSubmit)}>
-              Start!
-            </Button>
+            {isLoading ? (
+              <LoadingSpace>
+                <ActivityIndicator size="large" />
+                <Text category="c1">{strings['createChat.almostDone']}</Text>
+              </LoadingSpace>
+            ) : (
+              <Button size="giant" onPress={handleSubmit(onSubmit)}>
+                {strings['createChat.start']}
+              </Button>
+            )}
           </ButtonView>
         </ContentSafeAreaView>
       </RootLayout>
@@ -149,5 +163,12 @@ const ButtonView = variance(View)(() => ({
   root: {
     paddingTop: PADDING,
     marginTop: 'auto',
+  },
+}));
+
+const LoadingSpace = variance(Space)(() => ({
+  root: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));

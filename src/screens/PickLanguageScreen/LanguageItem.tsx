@@ -4,14 +4,14 @@ import {observer} from 'mobx-react-lite';
 import {sized, useTheme, variance} from '../../core';
 import {Text} from '@ui-kitten/components';
 import {SvgProps} from 'react-native-svg';
-import {Locale} from '../../core/Localization';
 import {RippleButton} from '../../components/RippleButton';
 import {CheckSvg} from '../../assets/svg/colorless';
+import {Language} from '../../core/Language';
 
 export type ListItem = {
   Icon: React.ComponentType<SvgProps>;
   text: string;
-  value: Locale;
+  value: Language;
 };
 
 export type LanguageSettingsScreenItemProps = {

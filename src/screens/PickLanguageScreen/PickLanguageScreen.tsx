@@ -3,11 +3,11 @@ import {observer} from 'mobx-react-lite';
 import {Layout} from '@ui-kitten/components';
 import {variance} from '../../core';
 import LanguageList from './LanguageList';
-import {Locale} from '../../core/Localization';
+import {Language} from '../../core';
 
 export type PickLanguageScreenProps = {
-  onSelect(locale: Locale): void;
-  selected?: Locale;
+  onSelect(language: Language): void;
+  selected?: Language;
 };
 
 export default observer(function PickLanguageScreen({

@@ -5,49 +5,61 @@ import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {Input, Layout} from '@ui-kitten/components';
 import {sized, useTheme, variance} from '../../core';
 import {PADDING} from '../constants';
-import {ArrowRightSvg} from '../../assets/svg/colorless';
+import {ArrowUpSvg} from '../../assets/svg/colorless';
 import {HoldSpeechButton} from './HoldSpeechButton';
 import {observer} from 'mobx-react-lite';
 import {Message as MessageComponent} from './Message';
-import {Message} from '../../core/ChatsService';
+import {Message} from '../../core/ChatService';
+import LottieView from 'lottie-react-native';
+import {useStrings} from '../../core/Root/hooks';
 
 export type ChatScreenProps = {
   isSpeaking: boolean;
-  onSpeechStart(): void;
-  onSpeechFinish(): void;
+  isSending: boolean;
+  speechingMessage: number | undefined;
+  onSpeechStartPress(): void;
+  onSpeechFinishPress(): void;
   message: string;
   onChangeMessage(message: string): void;
   messages: Message[];
   onSendMessagePress(): void;
+  onSynthesize(index: number): void;
+  onPausePress(): void;
 };
 
-// TODO: l10n
 export const ChatScreen = observer(
   ({
-    onSpeechFinish,
-    onSpeechStart,
+    onSpeechFinishPress,
+    onSpeechStartPress,
     isSpeaking,
+    isSending,
+    speechingMessage,
     message,
     onChangeMessage,
     messages,
     onSendMessagePress,
+    onSynthesize,
+    onPausePress,
   }: ChatScreenProps) => {
+    const strings = useStrings();
     const renderItem = useCallback(
-      ({item}: {item: Message}) => (
+      ({item, index}: {item: Message; index: number}) => (
         <MessageComponent
           inverted={item.role === 'user'}
           text={item.content}
           playPossible={item.role === 'assistant'}
-          isPlaying={false}
+          isPlaying={speechingMessage === index}
+          onPlayPress={() => onSynthesize(index)}
+          onPausePress={onPausePress}
         />
       ),
-      [],
+      [onPausePress, onSynthesize, speechingMessage],
     );
     const theme = useTheme();
     return (
       <RootLayout level="4">
         <KeyboardAvoidingView
-          style={{flex: 1}}
+          style={styles.keyboardView}
           enabled={Platform.OS === 'ios'}
           behavior="height">
           <RootSafeAreaView edges={['bottom']}>
@@ -64,7 +76,7 @@ export const ChatScreen = observer(
                   value={message}
                   onChangeText={onChangeMessage}
                   textStyle={styles.input}
-                  placeholder="Typing..."
+                  placeholder={strings['chat.typing']}
                   multiline
                 />
                 {message ? (
@@ -75,12 +87,26 @@ export const ChatScreen = observer(
                       />
                     </SendButton>
                   </SendButtonView>
+                ) : isSending ? (
+                  <SendButtonView>
+                    <SendButton onPress={onSendMessagePress} hitSlop={10}>
+                      <LottieView
+                        style={{
+                          width: SEND_BUTTON_SIZE,
+                          height: SEND_BUTTON_SIZE,
+                        }}
+                        source={require('../../assets/lottie/chat-loading.json')}
+                        autoPlay
+                        loop
+                      />
+                    </SendButton>
+                  </SendButtonView>
                 ) : null}
               </View>
               <SpeakButtonView>
                 <HoldSpeechButton
-                  onSpeechFinish={onSpeechFinish}
-                  onSpeechStart={onSpeechStart}
+                  onSpeechFinishPress={onSpeechFinishPress}
+                  onSpeechStartPress={onSpeechStartPress}
                   isSpeaking={isSpeaking}
                 />
               </SpeakButtonView>
@@ -98,7 +124,7 @@ const RootLayout = variance(Layout)(() => ({
   },
 }));
 
-const ArrowRightIcon = sized(ArrowRightSvg, 20);
+const ArrowRightIcon = sized(ArrowUpSvg, 20);
 
 const SEND_BUTTON_SIZE = 35;
 const SEND_BUTTON_RIGHT_PADDING = 10;
@@ -110,6 +136,9 @@ const styles = StyleSheet.create({
   input: {
     minHeight: 50,
     paddingRight: SEND_BUTTON_SIZE + SEND_BUTTON_RIGHT_PADDING,
+  },
+  keyboardView: {
+    flex: 1,
   },
 });
 

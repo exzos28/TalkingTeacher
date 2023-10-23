@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import {variance} from '../../core';
 import LottieView from 'lottie-react-native';
 import {Button} from '@ui-kitten/components';
-import {useRoot} from '../../core/Root/hooks';
+import {useRoot, useStrings} from '../../core/Root/hooks';
 import {expr} from 'mobx-utils';
 import {PADDING} from '../constants';
 
@@ -16,6 +16,7 @@ export const EmptyContent = observer(({onCreatePress}: EmptyContentProps) => {
   const {
     windowDimensionsState: {screen},
   } = useRoot();
+  const strings = useStrings();
   const size = expr(() => Math.min(screen.height, screen.width) - 50);
   return (
     <RootView>
@@ -29,7 +30,7 @@ export const EmptyContent = observer(({onCreatePress}: EmptyContentProps) => {
       </LottieContainerView>
       <ButtonView>
         <Button size="giant" onPress={onCreatePress}>
-          Create chat
+          {strings['chats.createChat']}
         </Button>
       </ButtonView>
     </RootView>

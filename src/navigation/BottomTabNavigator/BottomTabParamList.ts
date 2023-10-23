@@ -1,10 +1,10 @@
-import {Locale} from '../../core/Localization';
+import {Language} from '../../core/Language';
 
 export type BottomTabParamList = {
   Dashboard: undefined;
   Settings:
     | {
-        pickedLanguage: Locale;
+        pickedLanguage: Language;
       }
     | undefined;
   Debug: undefined;

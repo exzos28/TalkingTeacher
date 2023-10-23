@@ -1,8 +1,8 @@
 import React, {useCallback} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Locale} from '../../core/Localization';
 import {PickLanguageContainer} from '../../containers/PickLanguageContainer';
 import {RootStackBindingProps} from './RootStackBindingProps';
+import {Language} from '../../core/Language';
 
 export type PickLanguageForSettingsBindingProps =
   RootStackBindingProps<'PickLanguageForSettings'>;
@@ -12,7 +12,7 @@ export default observer(function PickLanguageForSettingsBinding(
 ) {
   const {navigation} = props;
   const onSelect = useCallback(
-    (value: Locale) =>
+    (value: Language) =>
       navigation.navigate('Root', {
         screen: 'Settings',
         params: {

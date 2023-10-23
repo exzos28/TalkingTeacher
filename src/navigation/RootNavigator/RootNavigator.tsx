@@ -6,11 +6,12 @@ import {RootParamList} from './RootParamList';
 import CreateChatBinding from './CreateChatBinding';
 import ChatBinding from './ChatBinding';
 import PickLanguageForSettingsBinding from './PickLanguageForSettingsBinding';
+import {useStrings} from '../../core/Root/hooks';
 
 const {Navigator, Screen} = createStackNavigator<RootParamList>();
 
-// TODO: l10n
 export const RootNavigator = observer(() => {
+  const strings = useStrings();
   return (
     <Navigator
       initialRouteName="Root"
@@ -26,13 +27,20 @@ export const RootNavigator = observer(() => {
       <Screen
         name="CreateChat"
         component={CreateChatBinding}
-        options={{title: 'Create chat'}}
+        options={{title: strings['navigation.createChat']}}
       />
-      <Screen name="Chat" component={ChatBinding} options={{title: 'Chat'}} />
+      <Screen
+        name="Chat"
+        component={ChatBinding}
+        options={{title: strings['navigation.chat']}}
+      />
       <Screen
         name="PickLanguageForSettings"
         component={PickLanguageForSettingsBinding}
-        options={{title: 'Select language', headerBackTitleVisible: false}}
+        options={{
+          title: strings['navigation.selectLanguage'],
+          headerBackTitleVisible: false,
+        }}
       />
     </Navigator>
   );

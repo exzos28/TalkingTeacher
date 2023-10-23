@@ -2,84 +2,133 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {observer} from 'mobx-react-lite';
 import {ChatScreen} from '../screens/ChatScreen';
 import Voice from '@react-native-voice/voice';
-import {SpeechResultsEvent} from '@react-native-voice/voice';
 import {useRoot} from '../core/Root/hooks';
-import {ChatService} from '../core/ChatsService';
+import {ChatService} from '../core/ChatService';
 import {expr} from 'mobx-utils';
 import {FULFILLED} from '../core/AsyncAtom';
+import TrackPlayer, {Event} from 'react-native-track-player';
+import {autorun} from 'mobx';
+import {initial} from 'lodash';
 
 export type ChatContainerProps = {
   chatId: string;
+  getIsFocused(): boolean;
 };
 
-export const ChatContainer = observer(({chatId}: ChatContainerProps) => {
-  const root = useRoot();
-  const [service] = useState(() => new ChatService(root, chatId));
-  const {chatInfoState, messagesState} = service;
-  useEffect(() => {
-    service.subscribe();
-  }, [service]);
-  const [pressed, setPressed] = useState(false);
-  const [value, setValue] = useState('');
-  const onSpeechResultsHandler = useCallback((result: SpeechResultsEvent) => {
-    const newValue = result.value?.join() ?? '';
-    setValue(newValue);
-  }, []);
-  useEffect(() => {
-    Voice.onSpeechResults = onSpeechResultsHandler;
-    return () => {
+export const ChatContainer = observer(
+  ({chatId, getIsFocused}: ChatContainerProps) => {
+    const root = useRoot();
+    const {textToSpeech, settings} = useRoot();
+    const [service] = useState(() => new ChatService(root, chatId));
+    const {chatInfoState, messagesState} = service;
+    const [isSending, setIsSending] = useState(false);
+    const [speechingMessage, setSpeechingMessage] = useState<number>();
+    const [pressed, setPressed] = useState(false);
+    const [value, setValue] = useState('');
+
+    useEffect(() => {
+      service.subscribe();
+    }, [service]);
+    useEffect(
+      () =>
+        autorun(() => {
+          if (!getIsFocused()) {
+            // noinspection JSIgnoredPromiseFromCall
+            TrackPlayer.reset();
+          }
+        }),
+      [getIsFocused],
+    );
+    useEffect(() => {
+      Voice.onSpeechResults = result => {
+        const newValue = result.value?.join() ?? '';
+        setValue(newValue);
+      };
+      TrackPlayer.addEventListener(Event.PlaybackQueueEnded, () => {
+        setSpeechingMessage(undefined);
+      });
+      return () => {
+        Voice.destroy().then(Voice.removeAllListeners);
+      };
+    }, []);
+
+    const start = useCallback(async () => {
+      if (chatInfoState?.status !== FULFILLED) {
+        return;
+      }
+      setPressed(true);
+      await Voice.start(chatInfoState.result.language);
+    }, [chatInfoState]);
+    const end = useCallback(() => {
+      setPressed(false);
       Voice.destroy().then(Voice.removeAllListeners);
-    };
-  }, [onSpeechResultsHandler]);
-  const start = useCallback(async () => {
-    if (chatInfoState?.status !== FULFILLED) {
-      return;
-    }
-    setPressed(true);
-    await Voice.start(chatInfoState.result.language);
-  }, [chatInfoState]);
-  const end = useCallback(() => {
-    setPressed(false);
-    Voice.destroy().then(Voice.removeAllListeners);
-  }, []);
+    }, []);
 
-  const originalMessages = expr(() =>
-    messagesState?.status === FULFILLED ? messagesState.result : [],
-  );
+    const originalMessages = expr(() =>
+      messagesState?.status === FULFILLED ? messagesState.result : [],
+    );
+    const messages = expr(() => initial(originalMessages));
 
-  const messages = expr(() => originalMessages);
-
-  const sendMessage = useCallback(async () => {
-    const newMessages = originalMessages.map(_ => ({
-      role: _.role,
-      content: _.content,
-    }));
-    newMessages.push({role: 'user', content: value});
-    await service.addMessage(value, 'user');
-    console.log('messages', newMessages.length);
-    setValue('');
-    const response = await fetch('http://3.70.155.81:3000/api/chat', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const synthesize = useCallback(
+      async (text: string) => {
+        if (chatInfoState?.status !== FULFILLED) {
+          return;
+        }
+        const uri = await textToSpeech.synthesize({
+          text: text,
+          languageCode: chatInfoState.result.language,
+        });
+        const track1 = {
+          url: uri,
+        };
+        await TrackPlayer.reset();
+        await TrackPlayer.add([track1]);
+        await TrackPlayer.play();
       },
-      body: JSON.stringify(newMessages),
-    });
-    const data = await response.json();
-    console.log(data);
-    const content = data.message.content;
-    await service.addMessage(content, 'assistant');
-  }, [originalMessages, service, value]);
+      [chatInfoState, textToSpeech],
+    );
 
-  return (
-    <ChatScreen
-      isSpeaking={pressed}
-      onSpeechStart={start}
-      onSpeechFinish={end}
-      message={value}
-      onChangeMessage={setValue}
-      messages={messages}
-      onSendMessagePress={sendMessage}
-    />
-  );
-});
+    const synthesizeByIndex = useCallback(
+      async (index: number) => {
+        if (chatInfoState?.status !== FULFILLED) {
+          return;
+        }
+        setSpeechingMessage(index);
+        const message = messages[index];
+        await synthesize(message.content);
+      },
+      [chatInfoState, messages, synthesize],
+    );
+
+    const stop = useCallback(async () => {
+      setSpeechingMessage(undefined);
+      await TrackPlayer.reset();
+    }, []);
+
+    const sendMessage = useCallback(async () => {
+      setIsSending(true);
+      setValue('');
+      const result = await service.sendMessage(value);
+      if (settings.isAutomaticallyPlayed) {
+        await synthesize(result.response);
+      }
+      setIsSending(false);
+    }, [service, settings, synthesize, value]);
+
+    return (
+      <ChatScreen
+        isSpeaking={pressed}
+        onSpeechStartPress={start}
+        onSpeechFinishPress={end}
+        message={value}
+        onChangeMessage={setValue}
+        messages={messages}
+        onSendMessagePress={sendMessage}
+        onPausePress={stop}
+        onSynthesize={synthesizeByIndex}
+        isSending={isSending}
+        speechingMessage={speechingMessage}
+      />
+    );
+  },
+);

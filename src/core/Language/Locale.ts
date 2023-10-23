@@ -1,9 +1,8 @@
 export enum Locale {
   English = 'en',
+  Russian = 'ru',
   French = 'fr',
   German = 'de',
   Italian = 'it',
-  PortugueseBrazil = 'pt',
-  Russian = 'ru',
   Spanish = 'es',
 }

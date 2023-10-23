@@ -4,5 +4,5 @@ import {Bound} from '../fp';
 
 export interface Chats {
   readonly state: PromiseState<Chat[], Error> | undefined;
-  createChat: Bound<(config: ChatConfig) => Promise<void>, Chats>;
+  createChat: Bound<(config: ChatConfig) => Promise<string>, Chats>;
 }

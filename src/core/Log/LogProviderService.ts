@@ -21,7 +21,6 @@ export default class LogProviderService implements Service, Log {
     const {logEnabled} = this._root.debug;
     if (logEnabled) {
       if (LOG_TO_METRO) {
-        console.log(content.body);
       }
       this._log.write(content);
     }

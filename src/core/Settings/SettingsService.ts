@@ -5,6 +5,7 @@ import SettingsStatic from './SettingsStatic';
 import {bind} from '../fp';
 import {Service} from '../structure';
 import {ChatType} from '../../types';
+import {Language} from '../Language';
 
 export default class SettingsService implements Settings, Service {
   @observable.ref private _settings = SettingsStatic.defaultSettings;
@@ -48,7 +49,7 @@ export default class SettingsService implements Settings, Service {
   );
 
   setStudiedLanguage = bind(
-    flow(function* (this: SettingsService, studiedLanguage: string) {
+    flow(function* (this: SettingsService, studiedLanguage: Language) {
       const nextPreferences: Required<SettingsRecord> = {
         ...this._settings,
         studiedLanguage: studiedLanguage,

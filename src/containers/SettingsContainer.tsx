@@ -2,13 +2,13 @@ import React, {useCallback} from 'react';
 import {observer} from 'mobx-react-lite';
 import {SettingsScreen} from '../screens/SettingsScreen';
 import {useOpenReview} from '../core/StoreReview';
-import {Url} from '../core';
+import {convertLanguageToLocale, Url} from '../core';
 import {useRoot} from '../core/Root/hooks';
-import {Locale} from '../core/Localization';
 import {ChatType} from '../types';
+import {convertLocaleToLanguage, Language} from '../core';
 
 export type SettingsContainerProps = {
-  pickLanguage(): Promise<Locale | undefined>;
+  pickLanguage(): Promise<Language | undefined>;
 };
 
 export default observer(function SettingsContainer({
@@ -23,7 +23,7 @@ export default observer(function SettingsContainer({
     translation: {locale},
   } = useRoot();
 
-  const currentLanguage = locale;
+  const currentLanguage = convertLocaleToLanguage(locale);
   const {
     studiedLanguage,
     chatType,
@@ -41,7 +41,7 @@ export default observer(function SettingsContainer({
   const pickCurrentLanguage = useCallback(async () => {
     const language = await pickLanguage();
     if (language) {
-      await preferences.setLocale(language);
+      await preferences.setLocale(convertLanguageToLocale(language));
     }
   }, [pickLanguage, preferences]);
 

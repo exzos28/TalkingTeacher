@@ -1,6 +1,6 @@
 import {FlagList} from '../Flags';
 import {JsonString} from '../Json';
-import {Chat, Message} from '../ChatsService';
+import {Chat, Message} from '../ChatService';
 
 export type KeyValueMap = {
   [K in string]: string;

@@ -6,20 +6,25 @@ import {PauseSvg, PlaySvg} from '../../assets/svg/colorless';
 
 type PlayPauseProps = {
   isPlaying: boolean;
+  onPlayPress(): void;
+  onPausePress(): void;
 };
-export const PlayPause = observer(({isPlaying}: PlayPauseProps) => {
-  const theme = useTheme();
-  const iconColor = theme.palette['color-primary-500'];
-  return (
-    <RootButton hitSlop={10}>
-      {isPlaying ? (
-        <PauseIcon color={iconColor} />
-      ) : (
-        <PlayIcon color={iconColor} />
-      )}
-    </RootButton>
-  );
-});
+export const PlayPause = observer(
+  ({isPlaying, onPlayPress, onPausePress}: PlayPauseProps) => {
+    const theme = useTheme();
+    const iconColor = theme.palette['color-primary-500'];
+    const onPress = isPlaying ? onPausePress : onPlayPress;
+    return (
+      <RootButton hitSlop={10} onPress={onPress}>
+        {isPlaying ? (
+          <PauseIcon color={iconColor} />
+        ) : (
+          <PlayIcon color={iconColor} />
+        )}
+      </RootButton>
+    );
+  },
+);
 
 const PlayIcon = sized(PlaySvg, 15);
 const PauseIcon = sized(PauseSvg, 15);

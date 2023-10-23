@@ -6,12 +6,12 @@ import {useRoot, useStrings} from '../../core/Root/hooks';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SelectedLanguage} from './SelectedLanguage';
 import {Gutter, Space} from '../../components/basic';
-import {Locale} from '../../core/Localization';
 import {runInAction} from 'mobx';
 import {LANGUAGES} from '../../DATA';
+import {convertLocaleToLanguage, Language} from '../../core';
 
 export type WelcomeLanguagesScreenProps = {
-  pickLanguage(): Promise<Locale | undefined>;
+  pickLanguage(): Promise<Language | undefined>;
   onNextPress(): void;
 };
 
@@ -28,7 +28,9 @@ export default observer(function WelcomeLanguagesScreen({
     [keys],
   );
   const [currentLanguage, setCurrentLanguage] = useState(() =>
-    values.findIndex((_, index) => keys[index] === translation.locale),
+    values.findIndex(
+      (_, index) => keys[index] === convertLocaleToLanguage(translation.locale),
+    ),
   );
   const [nextLanguage, setNextLanguage] = useState(() =>
     findNextLanguage(currentLanguage),
@@ -84,7 +86,7 @@ export default observer(function WelcomeLanguagesScreen({
         </Space>
       </ContentSpace>
       <NextButton onPress={onNextPress} size="medium">
-        {strings['welcomeLanguages.nextButton']}
+        {strings['welcomeLanguages.finish']}
       </NextButton>
     </RootSaveAreaView>
   );

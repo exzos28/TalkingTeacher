@@ -13,16 +13,17 @@ import {
 } from '../../assets/svg/colorless';
 import {PADDING} from '../constants';
 import {LANGUAGES} from '../../DATA';
-import {Locale} from '../../core/Localization';
 import {ChatType} from '../../types';
 import {ScrollView} from 'react-native-gesture-handler';
 import {StyleSheet} from 'react-native';
+import {Language} from '../../core';
+import {useStrings} from '../../core/Root/hooks';
 
 export type SettingsScreenProps = {
   goToWriteUs: () => void;
   goToRateApp: () => void;
-  currentLanguage: string;
-  studiedLanguage: string;
+  currentLanguage: Language;
+  studiedLanguage: Language;
   chatType: ChatType;
   isAutomaticallyPlayed: boolean;
 
@@ -45,59 +46,68 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
     onChatTypePress,
     onIsAutomaticallyPlayedPress,
   } = props;
-  const LocaleIcon = LANGUAGES.get(currentLanguage as Locale)?.Icon;
-  const StudiedIcon = LANGUAGES.get(studiedLanguage as Locale)?.Icon;
+  const strings = useStrings();
+  const LocaleIcon = LANGUAGES.get(currentLanguage)?.Icon;
+  const StudiedIcon = LANGUAGES.get(studiedLanguage)?.Icon;
   return (
     <RootView level="1">
       <ScrollView contentContainerStyle={styles.container}>
         <Menu>
-          <MenuGroup title="Languages">
+          <MenuGroup title={strings['settings.languages.title']}>
             <MenuItem
-              title="I speak"
+              title={strings['settings.languages.ISpeak']}
               left={<MenuItemIcon Icon={CircleIcon} />}
               onPress={onPickCurrentLanguagePress}
               right={LocaleIcon && <MenuItemIcon Icon={LocaleIcon} />}
             />
             <MenuItem
-              title="I want to practice"
+              title={strings['settings.languages.IWantToPractice']}
               left={<MenuItemIcon Icon={SquareIcon} />}
               onPress={onPickStudiedLanguagePress}
               right={StudiedIcon && <MenuItemIcon Icon={StudiedIcon} />}
             />
           </MenuGroup>
-          <MenuGroup title="Chat">
+          <MenuGroup title={strings['settings.chat.title']}>
             <MenuItem
               disabled
-              title="Chat type"
+              title={strings['settings.chat.chatType']}
               left={<MenuItemIcon Icon={BarCharIcon} />}
               onPress={onChatTypePress}
               right={
                 <Text>
-                  {chatType === ChatType.Chat ? 'Chat' : 'Audio only'}
+                  {chatType === ChatType.Chat
+                    ? strings['settings.chat.chatType.chat']
+                    : strings['settings.chat.chatType.audioOnly']}
                 </Text>
               }
             />
             <MenuItem
-              title="Audio is automatically played"
+              title={strings['settings.chat.audio']}
               left={<MenuItemIcon Icon={SquareIcon} />}
               onPress={onIsAutomaticallyPlayedPress}
-              right={<Text>{isAutomaticallyPlayed ? 'Yes' : 'No'}</Text>}
+              right={
+                <Text>
+                  {isAutomaticallyPlayed
+                    ? strings['settings.chat.audio.yes']
+                    : strings['settings.chat.audio.no']}
+                </Text>
+              }
             />
           </MenuGroup>
-          <MenuGroup title="Helpful">
+          <MenuGroup title={strings['settings.helpful.title']}>
             <MenuItem
-              title="Notifications"
+              title={strings['settings.helpful.notifications']}
               left={<MenuItemIcon Icon={BellIcon} />}
               right={<Toggle onPress={() => {}} />}
             />
             <MenuItem
               onPress={goToRateApp}
-              title="Rate the app"
+              title={strings['settings.helpful.rateTheApp']}
               left={<MenuItemIcon Icon={StarIcon} />}
             />
             <MenuItem
               onPress={goToWriteUs}
-              title="Write to us"
+              title={strings['settings.helpful.writeToUs']}
               left={<MenuItemIcon Icon={HeadsetIcon} />}
             />
           </MenuGroup>

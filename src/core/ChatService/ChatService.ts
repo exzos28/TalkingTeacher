@@ -5,14 +5,16 @@ import {Chat, Message, Role} from './types';
 import PromiseStateProviderImpl from '../AsyncAtom/PromiseStateProviderImpl';
 import {bind} from '../fp';
 import {nanoid} from 'nanoid/non-secure';
+import {ChatRestClient, SentMessage} from './ChatRestClient';
 
-export default class ChatService implements Service {
+export default class ChatsService implements Service {
   private readonly _messagesProvider: PromiseStateProvider<Message[], Error>;
   private readonly _chatInfoProvider: PromiseStateProvider<Chat, Error>;
 
   constructor(
     private readonly _root: {
       readonly jsonKeyValueStore: JsonKeyValueStore<JsonKeyValueMap>;
+      readonly chatRestClient: ChatRestClient;
     },
     readonly chatId: string,
   ) {
@@ -28,10 +30,7 @@ export default class ChatService implements Service {
     return this._chatInfoProvider.state;
   }
 
-  addMessage = bind(async (content: string, role: Role) => {
-    if (!this.messagesState || this.messagesState.status !== FULFILLED) {
-      throw new Error();
-    }
+  private async _addMessage(content: string, role: Role) {
     const chats = (await this._getChatsRecord()) ?? {};
     const messages = chats[this.chatId] ?? [];
     const message = {
@@ -43,6 +42,30 @@ export default class ChatService implements Service {
     chats[this.chatId] = messages;
     await this._root.jsonKeyValueStore.set('chatsRecord', chats);
     await this._messagesProvider.fetch(true);
+  }
+
+  private async _sendMessage(content: string) {
+    if (!this.messagesState || this.messagesState.status !== FULFILLED) {
+      throw new Error();
+    }
+    const messages = [...this.messagesState.result];
+    const newMessages: SentMessage[] = messages.map(_ => ({
+      role: _.role,
+      content: _.content,
+    }));
+    newMessages.push({role: 'user', content});
+
+    return this._root.chatRestClient.send(newMessages);
+  }
+
+  sendMessage = bind(async (content: string) => {
+    if (!this.messagesState || this.messagesState.status !== FULFILLED) {
+      throw new Error();
+    }
+    await this._addMessage(content, 'user');
+    const response = await this._sendMessage(content);
+    await this._addMessage(response, 'assistant');
+    return {response};
   }, this);
 
   private _getChatsRecord() {

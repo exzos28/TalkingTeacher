@@ -1,11 +1,11 @@
 import {computed, makeObservable} from 'mobx';
 
-import {Locale} from './Locale';
 import BaseTranslationService from './BaseTranslationService';
 import {Preferences} from '../Preferences';
 import {Localization} from './Localization';
 import {LocaleDict} from './LocaleStrings';
 import {en, ru, de} from './dictionaries';
+import {Locale} from '../Language/Locale';
 
 export default class TranslationService extends BaseTranslationService<
   Locale,

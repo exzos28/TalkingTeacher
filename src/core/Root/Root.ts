@@ -8,7 +8,7 @@ import {RootParamList} from '../../navigation/RootNavigator';
 import {NavigationContainerTheme} from '../NavigationContainerTheme';
 import {SpecialLocation} from '../SpecialLocation';
 import {Configuration, Debug} from '../Configuration';
-import {Locale, Localization, Translation} from '../Localization';
+import {Localization, Translation} from '../Localization';
 import {Preferences} from '../Preferences';
 import {LocaleDict} from '../Localization/LocaleStrings';
 import {WindowDimensionsState} from '../WindowDimensions';
@@ -23,7 +23,9 @@ import {ManualTestHelper} from '../ManualTestHelper';
 import {Settings} from '../Settings';
 import {AppWindow, AppWindowState} from '../AppWindow';
 import {JsonKeyValueMap, JsonKeyValueStore} from '../JsonKeyValueStore';
-import {Chats} from '../ChatsService';
+import {ChatRestClient, Chats} from '../ChatService';
+import {TextToSpeech} from '../TextToSpeech';
+import {Locale} from '../Language/Locale';
 
 export interface Root {
   readonly jsonKeyValueStore: JsonKeyValueStore<JsonKeyValueMap>;
@@ -50,7 +52,9 @@ export interface Root {
   readonly linkingOptionsProvider: LinkingOptionsProvider;
   readonly manualTestHelper: ManualTestHelper;
 
+  readonly chatRestClient: ChatRestClient;
   readonly chats: Chats;
+  readonly textToSpeech: TextToSpeech;
 
   reset(): void;
 }

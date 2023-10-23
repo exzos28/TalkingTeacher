@@ -6,24 +6,30 @@ import {PADDING} from '../constants';
 import LottieView from 'lottie-react-native';
 import {Text} from '@ui-kitten/components';
 import {StyleSheet} from 'react-native';
+import {useStrings} from '../../core/Root/hooks';
 
 export type HoldSpeechButtonProps = {
   isSpeaking: boolean;
-  onSpeechStart(): void;
-  onSpeechFinish(): void;
+  onSpeechStartPress(): void;
+  onSpeechFinishPress(): void;
 };
 
 export const HoldSpeechButton = observer(
-  ({isSpeaking, onSpeechStart, onSpeechFinish}: HoldSpeechButtonProps) => {
+  ({
+    isSpeaking,
+    onSpeechStartPress,
+    onSpeechFinishPress,
+  }: HoldSpeechButtonProps) => {
+    const strings = useStrings();
     return (
       <ContentButton
         pressed={isSpeaking}
-        onPressIn={onSpeechStart}
-        onPressOut={onSpeechFinish}>
+        onPressIn={onSpeechStartPress}
+        onPressOut={onSpeechFinishPress}>
         {isSpeaking ? (
           <Animation />
         ) : (
-          <ButtonText category="c2">Hold & Talk</ButtonText>
+          <ButtonText category="c2">{strings['chat.holdTalk']}</ButtonText>
         )}
       </ContentButton>
     );

@@ -16,3 +16,4 @@ export * from './LinkingOptionsProvider';
 export * from './BootSplash';
 export * from './Error';
 export * from './AppState';
+export * from './Language';

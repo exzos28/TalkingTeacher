@@ -1,14 +1,12 @@
+import {Language} from '../Language';
+
 export type Chat = ChatConfig & {
   id: string;
 };
 
-export type ChatConversation = Chat & {
-  messages: Message[];
-};
-
 export type ChatConfig = {
   topic: string;
-  language: string;
+  language: Language;
   difficulty: number;
   grammarCheck: boolean;
 };

@@ -1,10 +1,11 @@
 import {SettingsRecord} from './Settings';
 import {define, SETTINGS} from '../persistence';
 import {ChatType} from '../../types';
+import {Language} from '../Language';
 
 export default abstract class SettingsStatic {
   static defaultSettings: Required<SettingsRecord> = {
-    studiedLanguage: 'en',
+    studiedLanguage: Language.English,
     isAutomaticallyPlayed: false,
     chatType: ChatType.Chat,
   };
