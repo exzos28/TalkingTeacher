@@ -1,4 +1,4 @@
-import {Language} from '../../core/Language';
+import {Language} from '../../core';
 
 export const TOPICS: Map<Language, string[]> = new Map([
   [
@@ -44,6 +44,81 @@ export const TOPICS: Map<Language, string[]> = new Map([
       'Geschichte und historische Ereignisse',
       'Literatur und Bücher',
       'Bildung und Selbstverbesserung',
+    ],
+  ],
+  [
+    Language.French,
+    [
+      'Voyages et tourisme',
+      'Cuisine et gastronomie',
+      'Art et culture',
+      'Sports et fitness',
+      'Technologie et innovation',
+      'Santé et médecine',
+      'Nature et environnement',
+      'Histoire et événements historiques',
+      'Littérature et livres',
+      'Éducation et développement personnel',
+    ],
+  ],
+  [
+    Language.Italian,
+    [
+      'Viaggi e turismo',
+      'Cibo e cucina',
+      'Arte e cultura',
+      'Sport e fitness',
+      'Tecnologia e innovazione',
+      'Salute e medicina',
+      'Natura e ambiente',
+      'Storia ed eventi storici',
+      'Letteratura e libri',
+      'Educazione e sviluppo personale',
+    ],
+  ],
+  [
+    Language.Spanish,
+    [
+      'Viajes y turismo',
+      'Comida y cocina',
+      'Arte y cultura',
+      'Deportes y fitness',
+      'Tecnología e innovación',
+      'Salud y medicina',
+      'Naturaleza y medio ambiente',
+      'Historia y eventos históricos',
+      'Literatura y libros',
+      'Educación y desarrollo personal',
+    ],
+  ],
+  [
+    Language.Polish,
+    [
+      'Podróże i turystyka',
+      'Jedzenie i gotowanie',
+      'Sztuka i kultura',
+      'Sport i fitness',
+      'Technologia i innowacje',
+      'Zdrowie i medycyna',
+      'Natura i środowisko',
+      'Historia i wydarzenia historyczne',
+      'Literatura i książki',
+      'Edukacja i rozwijanie osobiste',
+    ],
+  ],
+  [
+    Language.Ukrainian,
+    [
+      'Подорожі та туризм',
+      'Їжа та кулінарія',
+      'Мистецтво та культура',
+      'Спорт та фітнес',
+      'Технології та інновації',
+      "Здоров'я та медицина",
+      'Природа та навколишнє середовище',
+      'Історія та історичні події',
+      'Література та книги',
+      'Освіта та саморозвиток',
     ],
   ],
 ]);

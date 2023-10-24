@@ -1,8 +1,9 @@
 import {CreateChatValues} from '../../screens/CreateChatScreen';
+import {Language} from '../../core';
 
 export const getInitialMessage = (
   values: CreateChatValues,
-  language: string,
+  language: Language,
 ) => {
   const {difficulty, topic, grammarCheck} = values;
   const level = getLevel(difficulty);

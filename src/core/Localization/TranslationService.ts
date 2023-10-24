@@ -4,8 +4,8 @@ import BaseTranslationService from './BaseTranslationService';
 import {Preferences} from '../Preferences';
 import {Localization} from './Localization';
 import {LocaleDict} from './LocaleStrings';
-import {en, ru, de} from './dictionaries';
-import {Locale} from '../Language/Locale';
+import {en, ru, de, uk, es, it, pl, fr} from './dictionaries';
+import {Locale} from '../Language';
 
 export default class TranslationService extends BaseTranslationService<
   Locale,
@@ -37,6 +37,16 @@ export default class TranslationService extends BaseTranslationService<
         return ru;
       case Locale.German:
         return de;
+      case Locale.French:
+        return fr;
+      case Locale.Polish:
+        return pl;
+      case Locale.Italian:
+        return it;
+      case Locale.Spanish:
+        return es;
+      case Locale.Ukrainian:
+        return uk;
       default:
         return {};
     }

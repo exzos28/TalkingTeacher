@@ -4,5 +4,7 @@ export enum Language {
   French = 'fr-FR',
   German = 'de-DE',
   Italian = 'it-IT',
-  Spain = 'es-ES',
+  Spanish = 'es-ES',
+  Polish = 'pl-PL',
+  Ukrainian = 'uk-UK',
 }
