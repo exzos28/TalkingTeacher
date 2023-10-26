@@ -31,11 +31,11 @@ export const ChatsScreen = observer(
           contentContainerStyle={styles.container}
           data={chats}
           renderItem={renderItem}
-          ListEmptyComponent={<EmptyContent onCreatePress={onCreatePress} />}
+          ListEmptyComponent={EmptyContent}
           ItemSeparatorComponent={Divider}
           ListFooterComponentStyle={styles.footer}
         />
-        {chats.length !== 0 && <Footer onCreatePress={onCreatePress} />}
+        <Footer onCreatePress={onCreatePress} />
       </RootLayout>
     );
   },
