@@ -12,6 +12,7 @@ import {ApplicationProvider} from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import {useTheme} from './core/styling';
 import Launcher from './Launcher';
+import {default as mapping} from '../mapping.json';
 
 function Wrapper({children}: ViewProps) {
   const styles = useStyles(theme => ({
@@ -26,7 +27,10 @@ function Wrapper({children}: ViewProps) {
   const theme = useTheme();
 
   return (
-    <ApplicationProvider {...eva} theme={theme.palette}>
+    <ApplicationProvider
+      {...eva}
+      customMapping={mapping as any}
+      theme={theme.palette}>
       <GestureHandlerRootView style={styles.root}>
         <StatusBar
           translucent
