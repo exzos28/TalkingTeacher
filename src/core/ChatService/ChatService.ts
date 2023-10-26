@@ -6,6 +6,7 @@ import PromiseStateProviderImpl from '../AsyncAtom/PromiseStateProviderImpl';
 import {bind} from '../fp';
 import {nanoid} from 'nanoid/non-secure';
 import {ChatRestClient, SentMessage} from './ChatRestClient';
+import {Admob} from '../Admob';
 
 export default class ChatsService implements Service {
   private readonly _messagesProvider: PromiseStateProvider<Message[], Error>;
@@ -15,6 +16,7 @@ export default class ChatsService implements Service {
     private readonly _root: {
       readonly jsonKeyValueStore: JsonKeyValueStore<JsonKeyValueMap>;
       readonly chatRestClient: ChatRestClient;
+      readonly admob: Admob;
     },
     readonly chatId: string,
   ) {
@@ -44,7 +46,24 @@ export default class ChatsService implements Service {
     await this._messagesProvider.fetch(true);
   }
 
+  private async _checkAdmob() {
+    let count =
+      (await this._root.jsonKeyValueStore
+        .get('advert')
+        .then(_ => _?.sentMessages)) ?? 0;
+    count += 1;
+    if (count >= 10) {
+      const response = await this._root.admob.showInterstitial();
+      if (response) {
+        count = 0;
+      }
+    }
+    await this._root.jsonKeyValueStore.set('advert', {sentMessages: count});
+    return count;
+  }
+
   private async _sendMessage(content: string) {
+    await this._checkAdmob();
     if (!this.messagesState || this.messagesState.status !== FULFILLED) {
       throw new Error();
     }

@@ -34,6 +34,7 @@ import {SettingsService} from '../Settings';
 import {ChatRestClientImpl, ChatsService} from '../ChatService';
 import {TextToSpeechRestClientImpl} from '../TextToSpeech';
 import TextToSpeechImpl from '../TextToSpeech/TextToSpeechImpl';
+import {AdmobService} from '../Admob';
 
 export default abstract class BaseRootService implements Root, Service {
   constructor(protected readonly _core: Core) {}
@@ -88,6 +89,8 @@ export default abstract class BaseRootService implements Root, Service {
 
   readonly manualTestHelper = new ManualTestHelperImpl();
 
+  readonly admob = new AdmobService(this);
+
   readonly textToSpeechRestClient = new TextToSpeechRestClientImpl();
   readonly textToSpeech = new TextToSpeechImpl(this);
 
@@ -108,6 +111,7 @@ export default abstract class BaseRootService implements Root, Service {
       this.log.subscribe(),
       this.debugLocationDetector.subscribe(),
 
+      this.admob.subscribe(),
       this.chats.subscribe(),
     );
   }

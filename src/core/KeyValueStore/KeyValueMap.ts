@@ -8,6 +8,9 @@ export type KeyValueMap = {
   flag: JsonString<FlagRecord>;
   chats: JsonString<Chat[]>;
   chatsRecord: JsonString<Record<string, Message[]>>;
+  advert: JsonString<{
+    sentMessages: number;
+  }>;
 };
 
 export type FlagRecord = Record<FlagList, boolean | undefined>;

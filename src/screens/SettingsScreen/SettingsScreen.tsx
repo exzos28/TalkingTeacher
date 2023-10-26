@@ -18,6 +18,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {StyleSheet} from 'react-native';
 import {Language} from '../../core';
 import {useStrings} from '../../core/Root/hooks';
+import {Text} from '@ui-kitten/components';
 
 export type SettingsScreenProps = {
   goToWriteUs: () => void;
@@ -38,13 +39,13 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
     currentLanguage,
     studiedLanguage,
     // chatType,
-    // isAutomaticallyPlayed,
+    isAutomaticallyPlayed,
     goToWriteUs,
     goToRateApp,
     onPickCurrentLanguagePress,
     onPickStudiedLanguagePress,
     // onChatTypePress,
-    // onIsAutomaticallyPlayedPress,
+    onIsAutomaticallyPlayedPress,
   } = props;
   const strings = useStrings();
   const LocaleIcon = LANGUAGES.get(currentLanguage)?.Icon;
@@ -68,33 +69,33 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
               right={StudiedIcon && <MenuItemIcon Icon={StudiedIcon} />}
             />
           </MenuGroup>
-          {/*<MenuGroup title={strings['settings.chat.title']}>*/}
-          {/*<MenuItem*/}
-          {/*  disabled*/}
-          {/*  title={strings['settings.chat.chatType']}*/}
-          {/*  left={<MenuItemIcon Icon={BarCharIcon} />}*/}
-          {/*  onPress={onChatTypePress}*/}
-          {/*  right={*/}
-          {/*    <Text>*/}
-          {/*      {chatType === ChatType.Chat*/}
-          {/*        ? strings['settings.chat.chatType.chat']*/}
-          {/*        : strings['settings.chat.chatType.audioOnly']}*/}
-          {/*    </Text>*/}
-          {/*  }*/}
-          {/*/>*/}
-          {/*<MenuItem*/}
-          {/*  title={strings['settings.chat.audio']}*/}
-          {/*  left={<MenuItemIcon Icon={SquareIcon} />}*/}
-          {/*  onPress={onIsAutomaticallyPlayedPress}*/}
-          {/*  right={*/}
-          {/*    <Text>*/}
-          {/*      {isAutomaticallyPlayed*/}
-          {/*        ? strings['settings.chat.audio.yes']*/}
-          {/*        : strings['settings.chat.audio.no']}*/}
-          {/*    </Text>*/}
-          {/*  }*/}
-          {/*/>*/}
-          {/*</MenuGroup>*/}
+          <MenuGroup title={strings['settings.chat.title']}>
+            {/*<MenuItem*/}
+            {/*  disabled*/}
+            {/*  title={strings['settings.chat.chatType']}*/}
+            {/*  left={<MenuItemIcon Icon={BarCharIcon} />}*/}
+            {/*  onPress={onChatTypePress}*/}
+            {/*  right={*/}
+            {/*    <Text>*/}
+            {/*      {chatType === ChatType.Chat*/}
+            {/*        ? strings['settings.chat.chatType.chat']*/}
+            {/*        : strings['settings.chat.chatType.audioOnly']}*/}
+            {/*    </Text>*/}
+            {/*  }*/}
+            {/*/>*/}
+            <MenuItem
+              title={strings['settings.chat.audio']}
+              left={<MenuItemIcon Icon={SquareIcon} />}
+              onPress={onIsAutomaticallyPlayedPress}
+              right={
+                <Text>
+                  {isAutomaticallyPlayed
+                    ? strings['settings.chat.audio.yes']
+                    : strings['settings.chat.audio.no']}
+                </Text>
+              }
+            />
+          </MenuGroup>
           <MenuGroup title={strings['settings.helpful.title']}>
             {/*<MenuItem*/}
             {/*  title={strings['settings.helpful.notifications']}*/}

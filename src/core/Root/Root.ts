@@ -26,6 +26,7 @@ import {JsonKeyValueMap, JsonKeyValueStore} from '../JsonKeyValueStore';
 import {ChatRestClient, Chats} from '../ChatService';
 import {TextToSpeech} from '../TextToSpeech';
 import {Locale} from '../Language/Locale';
+import {Admob} from '../Admob';
 
 export interface Root {
   readonly jsonKeyValueStore: JsonKeyValueStore<JsonKeyValueMap>;
@@ -51,6 +52,8 @@ export interface Root {
   readonly location: Location;
   readonly linkingOptionsProvider: LinkingOptionsProvider;
   readonly manualTestHelper: ManualTestHelper;
+
+  readonly admob: Admob;
 
   readonly chatRestClient: ChatRestClient;
   readonly chats: Chats;
