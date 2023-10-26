@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react-lite';
-import {Layout, Toggle, Text} from '@ui-kitten/components';
+import {Layout} from '@ui-kitten/components';
 import {sized, variance} from '../../core';
 import {Menu, MenuGroup, MenuItem, MenuItemIcon} from '../../components/Menu';
 import {
@@ -37,14 +37,14 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
   const {
     currentLanguage,
     studiedLanguage,
-    chatType,
-    isAutomaticallyPlayed,
+    // chatType,
+    // isAutomaticallyPlayed,
     goToWriteUs,
     goToRateApp,
     onPickCurrentLanguagePress,
     onPickStudiedLanguagePress,
-    onChatTypePress,
-    onIsAutomaticallyPlayedPress,
+    // onChatTypePress,
+    // onIsAutomaticallyPlayedPress,
   } = props;
   const strings = useStrings();
   const LocaleIcon = LANGUAGES.get(currentLanguage)?.Icon;
@@ -68,39 +68,39 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
               right={StudiedIcon && <MenuItemIcon Icon={StudiedIcon} />}
             />
           </MenuGroup>
-          <MenuGroup title={strings['settings.chat.title']}>
-            <MenuItem
-              disabled
-              title={strings['settings.chat.chatType']}
-              left={<MenuItemIcon Icon={BarCharIcon} />}
-              onPress={onChatTypePress}
-              right={
-                <Text>
-                  {chatType === ChatType.Chat
-                    ? strings['settings.chat.chatType.chat']
-                    : strings['settings.chat.chatType.audioOnly']}
-                </Text>
-              }
-            />
-            <MenuItem
-              title={strings['settings.chat.audio']}
-              left={<MenuItemIcon Icon={SquareIcon} />}
-              onPress={onIsAutomaticallyPlayedPress}
-              right={
-                <Text>
-                  {isAutomaticallyPlayed
-                    ? strings['settings.chat.audio.yes']
-                    : strings['settings.chat.audio.no']}
-                </Text>
-              }
-            />
-          </MenuGroup>
+          {/*<MenuGroup title={strings['settings.chat.title']}>*/}
+          {/*<MenuItem*/}
+          {/*  disabled*/}
+          {/*  title={strings['settings.chat.chatType']}*/}
+          {/*  left={<MenuItemIcon Icon={BarCharIcon} />}*/}
+          {/*  onPress={onChatTypePress}*/}
+          {/*  right={*/}
+          {/*    <Text>*/}
+          {/*      {chatType === ChatType.Chat*/}
+          {/*        ? strings['settings.chat.chatType.chat']*/}
+          {/*        : strings['settings.chat.chatType.audioOnly']}*/}
+          {/*    </Text>*/}
+          {/*  }*/}
+          {/*/>*/}
+          {/*<MenuItem*/}
+          {/*  title={strings['settings.chat.audio']}*/}
+          {/*  left={<MenuItemIcon Icon={SquareIcon} />}*/}
+          {/*  onPress={onIsAutomaticallyPlayedPress}*/}
+          {/*  right={*/}
+          {/*    <Text>*/}
+          {/*      {isAutomaticallyPlayed*/}
+          {/*        ? strings['settings.chat.audio.yes']*/}
+          {/*        : strings['settings.chat.audio.no']}*/}
+          {/*    </Text>*/}
+          {/*  }*/}
+          {/*/>*/}
+          {/*</MenuGroup>*/}
           <MenuGroup title={strings['settings.helpful.title']}>
-            <MenuItem
-              title={strings['settings.helpful.notifications']}
-              left={<MenuItemIcon Icon={BellIcon} />}
-              right={<Toggle onPress={() => {}} />}
-            />
+            {/*<MenuItem*/}
+            {/*  title={strings['settings.helpful.notifications']}*/}
+            {/*  left={<MenuItemIcon Icon={BellIcon} />}*/}
+            {/*  right={<Toggle onPress={() => {}} />}*/}
+            {/*/>*/}
             <MenuItem
               onPress={goToRateApp}
               title={strings['settings.helpful.rateTheApp']}

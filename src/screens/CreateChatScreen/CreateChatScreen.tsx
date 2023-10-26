@@ -8,7 +8,6 @@ import {
   Select,
   SelectItem,
   Text,
-  Toggle,
 } from '@ui-kitten/components';
 import {variance} from '../../core';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -45,7 +44,7 @@ export const CreateChatScreen = observer(
       defaultValues: {
         topic: defaultTopic,
         difficulty: Difficulty.Light,
-        grammarCheck: true,
+        grammarCheck: false,
       },
     });
     const {control, handleSubmit} = form;
@@ -105,19 +104,19 @@ export const CreateChatScreen = observer(
               />
             </Space>
 
-            <Controller
-              control={control}
-              render={({field: {onChange, onBlur, value}}) => (
-                <Toggle
-                  style={styles.toggle}
-                  checked={value}
-                  onBlur={onBlur}
-                  onChange={onChange}>
-                  {strings['createChat.grammarCheck']}
-                </Toggle>
-              )}
-              name="grammarCheck"
-            />
+            {/*<Controller*/}
+            {/*  control={control}*/}
+            {/*  render={({field: {onChange, onBlur, value}}) => (*/}
+            {/*    <Toggle*/}
+            {/*      style={styles.toggle}*/}
+            {/*      checked={value}*/}
+            {/*      onBlur={onBlur}*/}
+            {/*      onChange={onChange}>*/}
+            {/*      {strings['createChat.grammarCheck']}*/}
+            {/*    </Toggle>*/}
+            {/*  )}*/}
+            {/*  name="grammarCheck"*/}
+            {/*/>*/}
           </Space>
           <ButtonView>
             {isLoading ? (
