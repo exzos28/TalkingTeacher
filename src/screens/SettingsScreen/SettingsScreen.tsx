@@ -56,6 +56,7 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
           <MenuGroup title={strings['settings.languages.title']}>
             <MenuItem
               title={strings['settings.languages.ISpeak']}
+              subtitle={strings['settings.languages.ISpeak.helper']}
               left={<MenuItemIcon Icon={CircleIcon} />}
               onPress={onPickCurrentLanguagePress}
               right={LocaleIcon && <MenuItemIcon Icon={LocaleIcon} />}

@@ -11,6 +11,7 @@ const en = {
 
   'settings.languages.title': 'Languages',
   'settings.languages.ISpeak': 'I speak',
+  'settings.languages.ISpeak.helper': 'Also is the language of the application',
   'settings.languages.IWantToPractice': 'I want to practice',
   'settings.chat.title': 'Chat',
   'settings.chat.chatType': 'Chat type',
