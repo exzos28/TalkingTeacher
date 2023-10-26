@@ -111,6 +111,7 @@ export const ChatContainer = observer(
       const result = await service.sendMessage(value);
       if (settings.isAutomaticallyPlayed) {
         await synthesize(result.response);
+        setSpeechingMessage(0);
       }
       setIsSending(false);
     }, [service, settings, synthesize, value]);
