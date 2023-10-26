@@ -61,9 +61,10 @@ export const ChatScreen = observer(
         <KeyboardAvoidingView
           style={styles.keyboardView}
           enabled={Platform.OS === 'ios'}
-          behavior="height">
+          behavior="padding">
           <RootSafeAreaView edges={['bottom']}>
             <FlatList
+              keyboardShouldPersistTaps="always"
               contentContainerStyle={styles.container}
               inverted
               data={messages}
