@@ -1,4 +1,4 @@
-package com.talkingteacher;
+package ai.teacher;
 import expo.modules.ReactActivityDelegateWrapper;
 import android.os.Bundle;
 
@@ -23,7 +23,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "TalkingTeacher";
+    return "ai.teacher";
   }
 
   /**

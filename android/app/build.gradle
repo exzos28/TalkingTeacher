@@ -74,9 +74,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.talkingteacher"
+    namespace "ai.teacher"
     defaultConfig {
-        applicationId "com.talkingteacher"
+        applicationId "ai.teacher"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
