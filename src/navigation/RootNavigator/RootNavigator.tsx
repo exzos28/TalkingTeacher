@@ -1,5 +1,8 @@
 import {observer} from 'mobx-react-lite';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import React from 'react';
 import {BottomTabBinding} from './BottomTabBinding';
 import {RootParamList} from './RootParamList';
@@ -18,6 +21,7 @@ export const RootNavigator = observer(() => {
       screenOptions={{
         cardShadowEnabled: true,
         headerBackTitleVisible: false,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
       <Screen
         name="Root"

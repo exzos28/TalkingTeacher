@@ -1,5 +1,8 @@
 import {observer} from 'mobx-react-lite';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import React from 'react';
 import WelcomeLanguagesBinding from './WelcomeLanguagesBinding';
 import {AuthParamList} from './AuthParamList';
@@ -20,7 +23,11 @@ export default observer(function AuthStack() {
     return null;
   }
   return (
-    <Navigator screenOptions={{cardShadowEnabled: true}}>
+    <Navigator
+      screenOptions={{
+        cardShadowEnabled: true,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}>
       <Screen
         name="WelcomeInfoApp"
         component={WelcomeInfoAppBinding}
