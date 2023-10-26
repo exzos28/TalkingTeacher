@@ -8,11 +8,11 @@ export const getInitialMessage = (
   const {difficulty, topic, grammarCheck} = values;
   const level = getLevel(difficulty);
 
-  let message = `Ты являешься ТОЛЬКО учителем ${language} языка.`;
-  message += `Тема общения ${topic}. Ты должен поддерживать беседу. Твоё сообщение не должно превышать 30 слов. `;
-  message += `Всё дальнейшее общение исключительно на ${language} и на ${level} уровне}`;
+  let message = `You are the ONLY teacher of ${language} language.`;
+  message += `The topic of the conversation is ${topic}. You must keep the conversation going. Your message should not exceed 30 words. `;
+  message += `All further communication is in ${language} and ${level} level only}`;
   message += grammarCheck
-    ? 'Ты должен проверять грамматические ошибки в сообщениях (кроме этого) и в конце своего сообщения писать их'
+    ? 'In future messages you should check for grammatical errors in your messages and write them at the end of your message.'
     : '';
 
   return message;
