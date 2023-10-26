@@ -8,8 +8,9 @@ const en = {
   'welcomeLanguages.title2': 'È fantastico🔥! Quale lingua vuoi praticare?',
   'welcomeLanguages.finish': 'Fine',
 
-  'settings.languages.title': 'Languages',
+  'settings.languages.title': 'Lingue',
   'settings.languages.ISpeak': 'Io parlo',
+  'settings.languages.ISpeak.helper': "Lingua dell'applicazione",
   'settings.languages.IWantToPractice': 'Voglio fare pratica',
   'settings.chat.title': 'Chat',
   'settings.chat.chatType': 'Tipo di chat',

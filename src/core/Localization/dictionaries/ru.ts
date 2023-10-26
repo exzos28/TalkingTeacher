@@ -9,8 +9,9 @@ const ru = {
     'Это здорово🔥! Какой язык вы хотите практиковать?',
   'welcomeLanguages.finish': 'Закончить',
 
-  'settings.languages.title': 'Languages',
+  'settings.languages.title': 'Языки',
   'settings.languages.ISpeak': 'Я говорю',
+  'settings.languages.ISpeak.helper': 'Язык приложения',
   'settings.languages.IWantToPractice': 'Я хочу практиковаться',
   'settings.chat.title': 'Chat',
   'settings.chat.chatType': 'Тип чата',

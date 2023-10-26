@@ -10,6 +10,7 @@ const de = {
 
   'settings.languages.title': 'Sprachen',
   'settings.languages.ISpeak': 'Ich spreche',
+  'settings.languages.ISpeak.helper': 'Anwendungssprache',
   'settings.languages.IWantToPractice': 'Ich möchte üben',
   'settings.chat.title': 'Chat',
   'settings.chat.chatType': 'Chat-Typ',
