@@ -1,4 +1,8 @@
 {
-  "name": "TalkingTeacher",
-  "displayName": "TalkingTeacher"
+  "name": "ai.teacher",
+  "displayName": "TalkingTeacher",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-6517374319512243~5984045761",
+    "ios_app_id": "ca-app-pub-6517374319512243~8837439811"
+  }
 }

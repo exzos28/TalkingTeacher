@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "319027952615",
+    "project_id": "ai-teacher-364e4",
+    "storage_bucket": "ai-teacher-364e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319027952615:android:f677ce2f8e85effd055b42",
+        "android_client_info": {
+          "package_name": "ai.teacher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLOaDdsp9WaLGlp-gtnxmWvAbtNHN_LVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
