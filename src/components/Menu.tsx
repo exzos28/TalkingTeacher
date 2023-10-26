@@ -49,7 +49,7 @@ export const MenuItem = observer((props: MenuItemProps) => {
     },
     itemSubTitle: {
       ...theme.fontByWeight('400'),
-      color: theme.palette['text-basic-color'],
+      color: theme.chroma(theme.palette['text-basic-color']).alpha(0.5).hex(),
     },
   }));
   return <OriginalMenuItem {...props} theme={itemTheme} />;
