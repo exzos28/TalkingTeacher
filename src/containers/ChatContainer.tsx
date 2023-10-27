@@ -26,6 +26,11 @@ export const ChatContainer = observer(
     const [pressed, setPressed] = useState(false);
     const [value, setValue] = useState('');
 
+    const handleChangeValue = useCallback(
+      (v: string) => setValue(v.slice(0, 250)),
+      [],
+    );
+
     useEffect(() => {
       service.subscribe();
     }, [service]);
@@ -42,7 +47,7 @@ export const ChatContainer = observer(
     useEffect(() => {
       Voice.onSpeechResults = result => {
         const newValue = result.value?.join() ?? '';
-        setValue(newValue);
+        handleChangeValue(newValue);
       };
       TrackPlayer.addEventListener(Event.PlaybackQueueEnded, () => {
         setSpeechingMessage(undefined);
@@ -50,7 +55,7 @@ export const ChatContainer = observer(
       return () => {
         Voice.destroy().then(Voice.removeAllListeners);
       };
-    }, []);
+    }, [handleChangeValue]);
 
     const start = useCallback(async () => {
       if (chatInfoState?.status !== FULFILLED) {
@@ -107,14 +112,14 @@ export const ChatContainer = observer(
 
     const sendMessage = useCallback(async () => {
       setIsSending(true);
-      setValue('');
+      handleChangeValue('');
       const result = await service.sendMessage(value);
       if (settings.isAutomaticallyPlayed) {
         await synthesize(result.response);
         setSpeechingMessage(0);
       }
       setIsSending(false);
-    }, [service, settings, synthesize, value]);
+    }, [handleChangeValue, service, settings, synthesize, value]);
 
     return (
       <ChatScreen
@@ -122,7 +127,7 @@ export const ChatContainer = observer(
         onSpeechStartPress={start}
         onSpeechFinishPress={end}
         message={value}
-        onChangeMessage={setValue}
+        onChangeMessage={handleChangeValue}
         messages={messages}
         onSendMessagePress={sendMessage}
         onPausePress={stop}

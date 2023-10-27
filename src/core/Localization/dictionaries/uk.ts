@@ -43,7 +43,7 @@ const en = {
 
   'createChat.topic': 'Тема:',
   'createChat.topicPlaceholder': 'Тема, про яку ви хочете поговорити',
-  'createChat.difficulty': 'Труднощі мови:',
+  'createChat.difficulty': 'Складність мови:',
   'createChat.grammarCheck': 'Перевірка граматики',
   'createChat.start': 'Почати!',
   'createChat.almostDone': 'Майже готово...',

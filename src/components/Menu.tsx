@@ -56,5 +56,11 @@ export const MenuItem = observer((props: MenuItemProps) => {
 });
 
 export const MenuItemIcon = observer((props: MenuItemIconProps) => {
-  return <OriginalMenuItemIcon {...props} />;
+  const theme = useTheme();
+  return (
+    <OriginalMenuItemIcon
+      {...props}
+      color={theme.palette['color-primary-500']}
+    />
+  );
 });

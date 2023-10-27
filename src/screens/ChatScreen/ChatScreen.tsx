@@ -90,7 +90,7 @@ export const ChatScreen = observer(
                   </SendButtonView>
                 ) : isSending ? (
                   <SendButtonView>
-                    <SendButton onPress={onSendMessagePress} hitSlop={10}>
+                    <FakeSendButton>
                       <LottieView
                         style={{
                           width: SEND_BUTTON_SIZE,
@@ -100,7 +100,7 @@ export const ChatScreen = observer(
                         autoPlay
                         loop
                       />
-                    </SendButton>
+                    </FakeSendButton>
                   </SendButtonView>
                 ) : null}
               </View>
@@ -162,6 +162,16 @@ const SendButtonView = variance(View)(() => ({
 }));
 
 const SendButton = variance(RectButton)(() => ({
+  root: {
+    width: SEND_BUTTON_SIZE,
+    height: SEND_BUTTON_SIZE,
+    borderRadius: SEND_BUTTON_SIZE / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
+
+const FakeSendButton = variance(View)(() => ({
   root: {
     width: SEND_BUTTON_SIZE,
     height: SEND_BUTTON_SIZE,

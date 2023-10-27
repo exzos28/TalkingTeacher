@@ -9,7 +9,7 @@ import {
   StarSvg,
   CircleSvg,
   SquareSvg,
-  BarChartSvg,
+  // BarChartSvg,
 } from '../../assets/svg/colorless';
 import {PADDING} from '../constants';
 import {LANGUAGES} from '../../DATA';
@@ -85,7 +85,7 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
             {/*/>*/}
             <MenuItem
               title={strings['settings.chat.audio']}
-              left={<MenuItemIcon Icon={SquareIcon} />}
+              left={<MenuItemIcon Icon={HeadsetIcon} />}
               onPress={onIsAutomaticallyPlayedPress}
               right={
                 <Text>
@@ -110,7 +110,7 @@ export default observer(function SettingsScreen(props: SettingsScreenProps) {
             <MenuItem
               onPress={goToWriteUs}
               title={strings['settings.helpful.writeToUs']}
-              left={<MenuItemIcon Icon={HeadsetIcon} />}
+              left={<MenuItemIcon Icon={BellIcon} />}
             />
           </MenuGroup>
         </Menu>
@@ -124,7 +124,7 @@ const HeadsetIcon = sized(HeadsetSvg, 20);
 const StarIcon = sized(StarSvg, 20);
 const CircleIcon = sized(CircleSvg, 20);
 const SquareIcon = sized(SquareSvg, 20);
-const BarCharIcon = sized(BarChartSvg, 20);
+// const BarCharIcon = sized(BarChartSvg, 20);
 
 const RootView = variance(Layout)(() => ({
   root: {

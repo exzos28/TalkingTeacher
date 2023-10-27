@@ -9,7 +9,7 @@ const en = {
     "That's awesome🔥! What language do you want to practice?",
   'welcomeLanguages.finish': 'Finish',
 
-  'settings.languages.title': 'Idiomas',
+  'settings.languages.title': 'Languages',
   'settings.languages.ISpeak': 'I speak',
   'settings.languages.ISpeak.helper': 'Application language',
   'settings.languages.IWantToPractice': 'I want to practice',

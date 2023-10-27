@@ -32,7 +32,7 @@ export default class ChatsService implements Service {
     return this._chatInfoProvider.state;
   }
 
-  private async _addMessage(content: string, role: Role) {
+  private async _cacheMessage(content: string, role: Role) {
     const chats = (await this._getChatsRecord()) ?? {};
     const messages = chats[this.chatId] ?? [];
     const message = {
@@ -62,7 +62,7 @@ export default class ChatsService implements Service {
     return count;
   }
 
-  private async _sendMessage(content: string) {
+  private async _sendMessages() {
     await this._checkAdmob();
     if (!this.messagesState || this.messagesState.status !== FULFILLED) {
       throw new Error();
@@ -72,18 +72,17 @@ export default class ChatsService implements Service {
       role: _.role,
       content: _.content,
     }));
-    newMessages.push({role: 'user', content});
 
-    return this._root.chatRestClient.send(newMessages);
+    return this._root.chatRestClient.send(newMessages.reverse());
   }
 
   sendMessage = bind(async (content: string) => {
     if (!this.messagesState || this.messagesState.status !== FULFILLED) {
       throw new Error();
     }
-    await this._addMessage(content, 'user');
-    const response = await this._sendMessage(content);
-    await this._addMessage(response, 'assistant');
+    await this._cacheMessage(content, 'user');
+    const response = await this._sendMessages();
+    await this._cacheMessage(response, 'assistant');
     return {response};
   }, this);
 

@@ -22,6 +22,7 @@ import {
   Gutter,
   Space,
 } from '../basic';
+import {SvgProps} from 'react-native-svg';
 
 export type MenuProps = ViewProps & {
   children: React.ReactNode | React.ReactNode[];
@@ -176,13 +177,19 @@ export const MenuItem = observer(
 );
 
 export type MenuItemIconProps = ViewProps & {
-  Icon: React.ComponentType;
+  Icon: React.ComponentType<SvgProps>;
 };
 
-export const MenuItemIcon = observer(({Icon, ...rest}: MenuItemIconProps) => {
-  return (
-    <View style={styles.menuIconRootView} {...rest}>
-      <Icon />
-    </View>
-  );
-});
+type InternalMenuIconProps = {
+  color: ColorValue;
+};
+
+export const MenuItemIcon = observer(
+  ({Icon, color, ...rest}: MenuItemIconProps & InternalMenuIconProps) => {
+    return (
+      <View style={styles.menuIconRootView} {...rest}>
+        <Icon color={color} />
+      </View>
+    );
+  },
+);
