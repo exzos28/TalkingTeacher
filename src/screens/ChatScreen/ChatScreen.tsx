@@ -25,6 +25,7 @@ export type ChatScreenProps = {
   onSendMessagePress(): void;
   onSynthesize(index: number): void;
   onPausePress(): void;
+  voiceIsAvailable: boolean;
 };
 
 export const ChatScreen = observer(
@@ -40,6 +41,7 @@ export const ChatScreen = observer(
     onSendMessagePress,
     onSynthesize,
     onPausePress,
+    voiceIsAvailable,
   }: ChatScreenProps) => {
     const strings = useStrings();
     const renderItem = useCallback(
@@ -104,13 +106,15 @@ export const ChatScreen = observer(
                   </SendButtonView>
                 ) : null}
               </View>
-              <SpeakButtonView>
-                <HoldSpeechButton
-                  onSpeechFinishPress={onSpeechFinishPress}
-                  onSpeechStartPress={onSpeechStartPress}
-                  isSpeaking={isSpeaking}
-                />
-              </SpeakButtonView>
+              {voiceIsAvailable && (
+                <SpeakButtonView>
+                  <HoldSpeechButton
+                    onSpeechFinishPress={onSpeechFinishPress}
+                    onSpeechStartPress={onSpeechStartPress}
+                    isSpeaking={isSpeaking}
+                  />
+                </SpeakButtonView>
+              )}
             </FooterView>
           </RootSafeAreaView>
         </KeyboardAvoidingView>

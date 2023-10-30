@@ -24,6 +24,7 @@ export const ChatContainer = observer(
     const [isSending, setIsSending] = useState(false);
     const [speechingMessage, setSpeechingMessage] = useState<number>();
     const [pressed, setPressed] = useState(false);
+    const [voiceIsAvailable, setVoiceIsAvailable] = useState(false);
     const [value, setValue] = useState('');
 
     const handleChangeValue = useCallback(
@@ -32,6 +33,17 @@ export const ChatContainer = observer(
     );
 
     useEffect(() => {
+      Voice.isAvailable().then(res => {
+        // shit library
+        // noinspection SuspiciousTypeOfGuard
+        if (typeof res === 'boolean') {
+          setVoiceIsAvailable(res);
+        } else if (res === 1) {
+          setVoiceIsAvailable(true);
+        } else if (res === 0) {
+          setVoiceIsAvailable(false);
+        }
+      });
       service.subscribe();
     }, [service]);
     useEffect(
@@ -134,6 +146,7 @@ export const ChatContainer = observer(
         onSynthesize={synthesizeByIndex}
         isSending={isSending}
         speechingMessage={speechingMessage}
+        voiceIsAvailable={voiceIsAvailable}
       />
     );
   },
