@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StatusBar, ViewProps} from 'react-native';
+import {BackHandler, StatusBar, ViewProps} from 'react-native';
 
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -51,6 +51,15 @@ export default function App() {
     }
     // noinspection JSIgnoredPromiseFromCall
     prepare();
+  }, []);
+  useEffect(() => {
+    const backAction = () => true;
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
   }, []);
   return initialized ? (
     <RootProvider>

@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import {variance} from '../../core';
+import {convertLanguageToLocale, variance} from '../../core';
 import {Button, Text} from '@ui-kitten/components';
 import {useRoot, useStrings} from '../../core/Root/hooks';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -42,7 +42,9 @@ export default observer(function WelcomeLanguagesScreen({
 
   useEffect(() => {
     // noinspection JSIgnoredPromiseFromCall
-    preferences.setLocale(values[currentLanguage].value);
+    preferences.setLocale(
+      convertLanguageToLocale(values[currentLanguage].value),
+    );
   }, [currentLanguage, nextLanguage, preferences, values]);
 
   const handlePickCurrentLanguage = useCallback(async () => {

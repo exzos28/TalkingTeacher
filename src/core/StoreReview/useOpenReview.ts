@@ -6,10 +6,14 @@ import {when} from 'mobx';
 import useOpenBrowserReview from './useOpenBrowserReview';
 import {useRoot} from '../Root/hooks';
 
-export default function useOpenReview() {
+export default function useOpenReview(browser: boolean) {
   const {appWindowState} = useRoot();
   const openBrowser = useOpenBrowserReview();
   return useCallback(async () => {
+    if (browser) {
+      await openBrowser();
+      return;
+    }
     try {
       if (await StoreReview.isAvailableAsync()) {
         await StoreReview.requestReview();
@@ -20,5 +24,5 @@ export default function useOpenReview() {
     } catch (raw) {
       await openBrowser();
     }
-  }, [appWindowState, openBrowser]);
+  }, [appWindowState, browser, openBrowser]);
 }

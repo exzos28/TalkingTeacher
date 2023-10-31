@@ -14,7 +14,7 @@ export type SettingsContainerProps = {
 export default observer(function SettingsContainer({
   pickLanguage,
 }: SettingsContainerProps) {
-  const review = useOpenReview();
+  const review = useOpenReview(true);
   const {
     location,
     configuration,

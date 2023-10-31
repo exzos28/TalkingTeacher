@@ -7,8 +7,9 @@ const values: ConfigurationValues = {
   privacyLink: 'https://likesfaster.com/privacy.html/' as Url,
   termsLink: 'https://likesfaster.com/terms.html/' as Url,
 
+  playStoreUrl:
+    'https://play.google.com/store/apps/details?id=ai.teacher' as Url,
   // TODO: Change
-  playStoreUrl: 'https://google.com/' as Url,
   appStoreUrl: 'https://google.com/' as Url,
 
   feedbackMail: 'oleksandr.kurinnyi.dev@gmail.com' as Email,
