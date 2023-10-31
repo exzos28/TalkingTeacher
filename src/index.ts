@@ -12,9 +12,11 @@ LogBox.ignoreLogs([
 ]);
 
 export default () => {
+  TrackPlayer.setupPlayer();
   if (!__DEV__) {
     Sentry.init(config);
+    AppRegistry.registerComponent(name, () => Sentry.wrap(App));
+  } else {
+    AppRegistry.registerComponent(name, () => App);
   }
-  AppRegistry.registerComponent(name, () => App);
-  TrackPlayer.setupPlayer();
 };

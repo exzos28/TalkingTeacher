@@ -8,6 +8,7 @@ import AuthSection from './AuthSection';
 import LogsSection from './LogsSection';
 import SentrySection from './SentrySection';
 import {Bubble} from '../../components/basic';
+import {Sentry} from '../../core/Sentry';
 
 export type DebugScreenProps = {
   goToLog(): void;
@@ -25,6 +26,18 @@ export default observer(function DebugScreen({
       <SentrySection />
       <LogsSection onOpenLogsPress={goToLog} />
       <Bubble>
+        <Button
+          title="Crash!"
+          onPress={() => {
+            Sentry.captureException(new Error('First error'));
+          }}
+        />
+        <Button
+          title="Native crash!"
+          onPress={() => {
+            Sentry.nativeCrash();
+          }}
+        />
         <Button title="Disable debug" onPress={onDisableDebugPress} />
       </Bubble>
     </ScrollView>
