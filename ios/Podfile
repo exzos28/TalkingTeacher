@@ -8,6 +8,7 @@ require Pod::Executable.execute_command('node', ['-p',
 
 platform :ios, '13.0'
 prepare_react_native_project!
+$RNFirebaseAsStaticFramework = true
 
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
 # because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
@@ -24,7 +25,6 @@ linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
   use_frameworks! :linkage => :static
-  $RNFirebaseAsStaticFramework = true
 end
 
 target 'TalkingTeacher' do
@@ -38,7 +38,9 @@ target 'TalkingTeacher' do
   end
   config = use_native_modules!
 
+  pod 'FirebaseCore', :modular_headers => true
   pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseInstallations', :modular_headers => true
 
   # Flags change depending on the env values.
   flags = get_default_flags()
