@@ -7,7 +7,7 @@ const ru = {
   'welcomeLanguages.title1': 'Я вижу, что вы уже говорите на ⬇️',
   'welcomeLanguages.title2':
     'Это здорово🔥! Какой язык вы хотите практиковать?',
-  'welcomeLanguages.finish': 'Закончить',
+  'welcomeLanguages.start': 'Старт',
 
   'settings.languages.title': 'Языки',
   'settings.languages.ISpeak': 'Я говорю',

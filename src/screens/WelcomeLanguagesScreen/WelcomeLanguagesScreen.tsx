@@ -1,13 +1,17 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import {convertLanguageToLocale, variance} from '../../core';
+import {
+  convertLanguageToLocale,
+  convertLocaleToLanguage,
+  Language,
+  variance,
+} from '../../core';
 import {Button, Text} from '@ui-kitten/components';
 import {useRoot, useStrings} from '../../core/Root/hooks';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {SelectedLanguage} from './SelectedLanguage';
 import {Gutter, Space} from '../../components/basic';
 import {LANGUAGES} from '../../DATA';
-import {convertLocaleToLanguage, Language} from '../../core';
 
 export type WelcomeLanguagesScreenProps = {
   pickLanguage(): Promise<Language | undefined>;
@@ -31,9 +35,13 @@ export default observer(function WelcomeLanguagesScreen({
       (_, index) => keys[index] === convertLocaleToLanguage(translation.locale),
     ),
   );
-  const [nextLanguage, setNextLanguage] = useState(() =>
-    findNextLanguage(currentLanguage),
-  );
+  const [nextLanguage, setNextLanguage] = useState(() => {
+    const enIndex = values.findIndex(_ => _.value === Language.English);
+    if (currentLanguage === enIndex) {
+      return findNextLanguage(currentLanguage);
+    }
+    return enIndex;
+  });
 
   useEffect(() => {
     // noinspection JSIgnoredPromiseFromCall
@@ -95,7 +103,7 @@ export default observer(function WelcomeLanguagesScreen({
         </Space>
       </ContentSpace>
       <NextButton onPress={onNextPress} size="medium">
-        {strings['welcomeLanguages.finish']}
+        {strings['welcomeLanguages.start']}
       </NextButton>
     </RootSaveAreaView>
   );

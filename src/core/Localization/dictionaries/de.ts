@@ -6,7 +6,7 @@ const de = {
 
   'welcomeLanguages.title1': 'Wie ich sehe, sprechen Sie bereits ⬇️',
   'welcomeLanguages.title2': 'Das ist toll🔥! Welche Sprache möchtest du üben?',
-  'welcomeLanguages.finish': 'Beenden',
+  'welcomeLanguages.start': 'Start',
 
   'settings.languages.title': 'Sprachen',
   'settings.languages.ISpeak': 'Ich spreche',
